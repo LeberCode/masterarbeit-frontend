@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>A JavaScript project</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <div class="App">
+      <div>
+        <h1>Prototype for my masters degree</h1>
+      </div>
+      <div class="Body">
+        <div id="Toolbox">
+          <h4>TOOLBOX</h4>
+          <div>
+            <h5>PIPES</h5>
+            <div class="Pipe" data-type="Default">Queue</div>
+            <div class="Pipe" data-type="Distributor">Topic</div>
+          </div>
+          <hr />
+          <div>
+            <h5>FILTER</h5>
+            <div class="Filter" data-type="Start">Sender</div>
+            <div class="Filter" data-type="End">Receiver</div>
+            <div class="Filter" data-type="Default">BL</div>
+            <div class="Filter" data-type="Distributor">Router</div>
+            <div class="Filter" data-type="Collector">Aggregator</div>
+          </div>
+        </div>
+        <div id="Diagram">
+          <h4>ARCHITECTURE</h4>
+          <button id="Deploy">Deploy</button>
+        </div>
+      </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>

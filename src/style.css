@@ -1,0 +1,160 @@
+.App {
+  text-align: center;
+}
+
+.Body {
+  display: flex;
+}
+
+#Diagram {
+  width: 80%;
+  height: 85vh;
+  margin: 6px;
+  border: 1px solid black;
+  position: relative;
+}
+
+#Toolbox {
+  width: 20%;
+  height: 85vh;
+  margin: 6px;
+  border: 1px solid black;
+}
+.Filter {
+  text-align: center;
+  align-content: center;
+  position: absolute;
+  border: 2px solid blue;
+  border-radius: 4px;
+  width: 84px;
+  height: 66px;
+  cursor: grab;
+  background-color: ghostwhite;
+}
+
+#Toolbox .Filter {
+  position: relative;
+  margin: 12px;
+}
+
+.Filter:active {
+  cursor: grabbing;
+}
+
+.Pipe {
+  text-align: center;
+  align-content: center;
+  position: absolute;
+  width: 60px;
+  height: 24px;
+  border: 2px solid black;
+  border-radius: 24px;
+  cursor: grab;
+  background-color: ghostwhite;
+}
+
+.Pipe:active {
+  cursor: grabbing;
+}
+
+#Toolbox .Pipe {
+  position: relative;
+  margin: 12px;
+}
+
+.custom-menu {
+  z-index: 1000;
+  position: absolute;
+  background-color: #c0c0c0;
+  border: 1px solid black;
+  padding: 2px;
+}
+
+.window {
+  z-index: 20;
+}
+.jtk-connector {
+  z-index: 4;
+}
+.jtk-endpoint {
+  z-index: 5;
+}
+.jtk-overlay {
+  z-index: 6;
+}
+
+.cm-editor {
+  max-height: 60vh;
+  cursor: default;
+}
+
+.editorContainer {
+  position: absolute;
+  /* top: 120px;
+  left: 0px;
+  right: 0px;
+  margin: auto; */
+  text-align: left;
+  width: 80%;
+  /* height: 50vh; */
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0px 0px 12px darkgray;
+  z-index: 99;
+  background-color: white;
+  cursor: grab;
+}
+
+.editorContainer:active {
+  cursor: grabbing;
+}
+
+.submitButton {
+  background-color: #04aa6d;
+  border: 1px black solid;
+  border-radius: 4px;
+  padding: 12px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin: 6px;
+  cursor: pointer;
+}
+
+.cancelButton {
+  border: 1px darkgray solid;
+  border-radius: 4px;
+  padding: 12px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin: 6px;
+  cursor: pointer;
+}
+
+.codeEditorButtons {
+  text-align: end;
+}
+
+.closingX {
+  background-color: red;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding: 8px;
+  border-top-right-radius: 12px;
+  cursor: pointer;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+#Deploy {
+  position: absolute;
+  right: 12px;
+  top: 24px;
+  background-color: #04aa6d;
+  border: 1px black solid;
+  border-radius: 4px;
+  padding: 12px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  cursor: pointer;
+}
