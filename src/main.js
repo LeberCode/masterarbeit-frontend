@@ -5,9 +5,23 @@ import { INTERCEPT_BEFORE_DROP, EVENT_DRAG_START } from "@jsplumb/browser-ui";
 import { isConnectionAllowed } from "./functions/isConnectionAllowed";
 import { initContextmenu } from "./functions/contextmenu";
 import { createEndpoints } from "./functions/createEndpoint";
-import { runCustomCode } from "./functions/api";
+import {
+  runCustomCode,
+  stopCustomCode,
+  restartCustomCode,
+} from "./functions/api";
 
 function App() {
+  const appState = (() => {
+    let state = {
+      beenPaused: false,
+    };
+
+    return {
+      getState: () => state,
+      setBeenPaused: (beenPaused) => (state.beenPaused = beenPaused),
+    };
+  })();
   const instance = jsPlumb.getInstance({});
   instance.setContainer("diagram");
   instance.ready(() => {
@@ -63,14 +77,19 @@ function App() {
     });
     initContextmenu(instance);
   });
+
+  document.getElementById("Run").addEventListener("click", () => {
+    if (!appState.getState().beenPaused) {
+      runCustomCode();
+      appState.setBeenPaused(true);
+    } else {
+      restartCustomCode();
+    }
+  });
+
+  document.getElementById("Stop").addEventListener("click", () => {
+    stopCustomCode();
+  });
 }
-
-document.getElementById("Run").addEventListener("click", () => {
-  runCustomCode();
-});
-
-document.getElementById("Stop").addEventListener("click", () => {
-  console.log("Hi Stop Button");
-});
 
 App();
