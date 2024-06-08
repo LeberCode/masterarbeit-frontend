@@ -148,9 +148,24 @@
 
 #Deploy {
   position: absolute;
+  right: 90px;
+  top: 24px;
+  width: 60px;
+  background-color: #04aa6d;
+  border: 1px black solid;
+  border-radius: 4px;
+  padding: 12px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  cursor: pointer;
+}
+
+#Pause {
+  position: absolute;
   right: 12px;
   top: 24px;
-  background-color: #04aa6d;
+  width: 60px;
+  background-color: red;
   border: 1px black solid;
   border-radius: 4px;
   padding: 12px;
