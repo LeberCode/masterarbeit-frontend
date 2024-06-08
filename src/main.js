@@ -5,7 +5,7 @@ import { INTERCEPT_BEFORE_DROP, EVENT_DRAG_START } from "@jsplumb/browser-ui";
 import { isConnectionAllowed } from "./functions/isConnectionAllowed";
 import { initContextmenu } from "./functions/contextmenu";
 import { createEndpoints } from "./functions/createEndpoint";
-import { deployCustomCode } from "./functions/api";
+import { runCustomCode } from "./functions/api";
 
 function App() {
   const instance = jsPlumb.getInstance({});
@@ -65,8 +65,12 @@ function App() {
   });
 }
 
-document.getElementById("Deploy").addEventListener("click", () => {
-  deployCustomCode();
+document.getElementById("Run").addEventListener("click", () => {
+  runCustomCode();
+});
+
+document.getElementById("Stop").addEventListener("click", () => {
+  console.log("Hi Stop Button");
 });
 
 App();

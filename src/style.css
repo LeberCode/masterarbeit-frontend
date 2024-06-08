@@ -146,7 +146,7 @@
   font-weight: bold;
 }
 
-#Deploy {
+#Run {
   position: absolute;
   right: 90px;
   top: 24px;
@@ -160,7 +160,7 @@
   cursor: pointer;
 }
 
-#Pause {
+#Stop {
   position: absolute;
   right: 12px;
   top: 24px;
