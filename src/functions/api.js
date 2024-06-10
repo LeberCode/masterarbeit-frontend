@@ -1,77 +1,97 @@
 import axios from "axios";
 import { SERVER_URL } from "../config";
-import { loading } from "./loader";
+import { loader, errorFeedback, successFeedback } from "./feedback";
 
 export const runCustomCode = () => {
-  loading(true);
+  loader(true);
   axios
     .post(`${SERVER_URL}/deployment/run`)
     .then((response) => {
-      loading(false);
+      loader(false);
       if (response.status === 200) {
-        console.log("Serverantwort:", response);
+        successFeedback();
+      } else {
+        errorFeedback(response);
       }
     })
     .catch((error) => {
+      loader(false);
+      errorFeedback(error);
       console.error(error);
     });
 };
 
 export const stopCustomCode = () => {
-  loading(true);
+  loader(true);
   axios
     .post(`${SERVER_URL}/deployment/stop`)
     .then((response) => {
-      loading(false);
+      loader(false);
       if (response.status === 200) {
-        console.log("Serverantwort:", response);
+        successFeedback();
+      } else {
+        errorFeedback(response);
       }
     })
     .catch((error) => {
+      loader(false);
+      errorFeedback(error);
       console.error(error);
     });
 };
 export const restartCustomCode = () => {
-  loading(true);
+  loader(true);
   axios
     .post(`${SERVER_URL}/deployment/restart`)
     .then((response) => {
-      loading(false);
+      loader(false);
       if (response.status === 200) {
-        console.log("Serverantwort:", response);
+        successFeedback();
+      } else {
+        errorFeedback(response);
       }
     })
     .catch((error) => {
+      loader(false);
+      errorFeedback(error);
       console.error(error);
     });
 };
 
 export const createCustomCode = (requestBody) => {
-  loading(true);
+  loader(true);
   axios
     .post(`${SERVER_URL}/customCode`, requestBody)
     .then((response) => {
-      loading(false);
+      loader(false);
       if (response.status === 200) {
-        console.log("Serverantwort:", response);
+        successFeedback();
+      } else {
+        errorFeedback(response);
       }
     })
     .catch((error) => {
+      loader(false);
+      errorFeedback(error);
       console.error(error);
     });
 };
 
 export const clearArchitecture = async () => {
-  loading(true);
+  loader(true);
   await axios
     .get(`${SERVER_URL}/deployment/clearArchitecture`)
     .then((response) => {
-      loading(false);
+      loader(false);
       if (response.status === 200) {
-        console.log("Serverantwort:", response);
+        successFeedback();
+      } else {
+        errorFeedback(response);
       }
     })
     .catch((error) => {
+      loader(false);
+      errorFeedback(error);
       console.error(error);
     });
 };
