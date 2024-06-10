@@ -61,10 +61,10 @@ export const createCustomCode = (requestBody) => {
     });
 };
 
-export const clearArchitecture = () => {
+export const clearArchitecture = async () => {
   loading(true);
-  axios
-    .get(`${SERVER_URL}/deployment/clearDocker`)
+  await axios
+    .get(`${SERVER_URL}/deployment/clearArchitecture`)
     .then((response) => {
       loading(false);
       if (response.status === 200) {

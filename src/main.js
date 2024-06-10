@@ -98,9 +98,15 @@ function App() {
   document.getElementById("Stop").setAttribute("disabled", "disabled");
   document.getElementById("Run").setAttribute("disabled", "disabled");
 
-  document.getElementById("ClearArchitecture").addEventListener("click", () => {
-    clearArchitecture();
-  });
+  document
+    .getElementById("ClearArchitecture")
+    .addEventListener("click", async () => {
+      await clearArchitecture();
+      let elements = document.querySelectorAll(
+        "#Diagram .Filter, #Diagram .Pipe, .jtk-endpoint, .jtk-connector"
+      );
+      elements.forEach((element) => element.remove());
+    });
 }
 
 App();
