@@ -98,4 +98,5 @@ const handleSubmit = (node, code) => {
   };
   createCustomCode(requestBody);
   node.style.visibility = "hidden";
+  document.getElementById("Run").removeAttribute("disabled");
 };

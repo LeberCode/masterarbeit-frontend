@@ -173,3 +173,27 @@
   padding-bottom: 6px;
   cursor: pointer;
 }
+#ClearArchitecture {
+  position: absolute;
+  left: 12px;
+  top: 24px;
+  width: 120px;
+  background-color: lightblue;
+  border: 1px black solid;
+  border-radius: 4px;
+  padding: 12px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  cursor: pointer;
+}
+
+#Stop:disabled {
+  cursor: not-allowed;
+  background-color: lightgray;
+  color: black;
+}
+#Run:disabled {
+  cursor: not-allowed;
+  background-color: lightgray;
+  color: black;
+}

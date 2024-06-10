@@ -9,6 +9,7 @@ import {
   runCustomCode,
   stopCustomCode,
   restartCustomCode,
+  clearArchitecture,
 } from "./functions/api";
 
 function App() {
@@ -85,10 +86,20 @@ function App() {
     } else {
       restartCustomCode();
     }
+    document.getElementById("Run").setAttribute("disabled", "disabled");
+    document.getElementById("Stop").removeAttribute("disabled");
   });
 
   document.getElementById("Stop").addEventListener("click", () => {
     stopCustomCode();
+    document.getElementById("Stop").setAttribute("disabled", "disabled");
+    document.getElementById("Run").removeAttribute("disabled");
+  });
+  document.getElementById("Stop").setAttribute("disabled", "disabled");
+  document.getElementById("Run").setAttribute("disabled", "disabled");
+
+  document.getElementById("ClearArchitecture").addEventListener("click", () => {
+    clearArchitecture();
   });
 }
 
