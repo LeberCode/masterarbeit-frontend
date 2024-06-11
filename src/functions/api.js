@@ -95,3 +95,23 @@ export const clearArchitecture = async () => {
       console.error(error);
     });
 };
+
+export const scaleOut = async (id) => {
+  const requestBody = { id: id };
+  loader(true);
+  await axios
+    .post(`${SERVER_URL}/deployment/scaleOut`, requestBody)
+    .then((response) => {
+      loader(false);
+      if (response.status === 200) {
+        successFeedback();
+      } else {
+        errorFeedback(response);
+      }
+    })
+    .catch((error) => {
+      loader(false);
+      errorFeedback(error);
+      console.error(error);
+    });
+};

@@ -1,5 +1,6 @@
 import { duplicatePipe, duplicateFilter } from "./duplication";
 import { codeEditor } from "./codeEditor";
+import { scaleOut } from "./api";
 
 export const initContextmenu = (instance) => {
   // Kontext Menü zum Löschen von Connections
@@ -38,6 +39,9 @@ export const initContextmenu = (instance) => {
         <button style='border: none; padding: 6px 12px;' class='code-filter'>
           Code Filter
         </button>
+        <button style='background-color: blue; color: white; border: none; padding: 6px 12px;' class='scale-out'>
+          SCALE OUT
+        </button>
         <button style='background-color: red; color: white; border: none; padding: 6px 12px;' class='delete-filter'>
           Delete Filter
         </button>
@@ -55,6 +59,9 @@ export const initContextmenu = (instance) => {
   });
   $("body").on("click", ".code-filter", (event) => {
     codeEditor(instance);
+  });
+  $("body").on("click", ".scale-out", (event) => {
+    scaleOut(window.selectedFilter);
   });
 
   // Kontext Menü zum Löschen von Pipes
