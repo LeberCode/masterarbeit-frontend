@@ -95,6 +95,7 @@ const handleSubmit = (node, code) => {
     id: window.selectedFilter,
     code: code,
     isDeployed: false,
+    isPaused: false,
   };
   createCustomCode(requestBody);
   node.style.visibility = "hidden";
