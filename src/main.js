@@ -106,6 +106,8 @@ function App() {
         "#Diagram .Filter, #Diagram .Pipe, .jtk-endpoint, .jtk-connector"
       );
       elements.forEach((element) => element.remove());
+      document.getElementById("Stop").setAttribute("disabled", "disabled");
+      document.getElementById("Run").setAttribute("disabled", "disabled");
     });
 }
 
