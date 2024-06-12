@@ -97,7 +97,7 @@ export const clearArchitecture = async () => {
 };
 
 export const scaleOut = async (id) => {
-  const requestBody = { id: id };
+  const requestBody = { id };
   loader(true);
   await axios
     .post(`${SERVER_URL}/deployment/scaleOut`, requestBody)

@@ -96,7 +96,7 @@ const handleSubmit = (node, code) => {
     code: code,
     isDeployed: false,
     isPaused: false,
-    isScaled: false,
+    isScaled: "",
   };
   createCustomCode(requestBody);
   node.style.visibility = "hidden";
