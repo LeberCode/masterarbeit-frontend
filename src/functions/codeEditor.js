@@ -37,28 +37,24 @@ export const codeEditor = (instance) => {
     editorContainer.appendChild(closingX);
 
     let editorValues;
-    switch (filterToCode.type) {
-      case "Sender":
-        editorValues = {
-          doc: "// publisher.js\nconst amqp = require('amqplib/callback_api');\n\nconst rabbitmqUrl = 'amqp://mquser:mqpass@rabbit:5672';\n\namqp.connect(rabbitmqUrl, (error0, connection) => {\n    if (error0) {\n        throw error0;\n    }\n    connection.createChannel((error1, channel) => {\n        if (error1) {\n            throw error1;\n        }\n\n        const queue = 'hello';\n\n        channel.assertQueue(queue, {\n            durable: false\n        });\n\n        const sendMessage = () => {\n            const msg = 'Hello World! ' + new Date().toISOString();\n            channel.sendToQueue(queue, Buffer.from(msg));\n            console.log(\" [x] Sent '%s'\", msg);\n        };\n\n        setInterval(sendMessage, 1000);\n    });\n});\n",
-          extensions: [basicSetup, javascript()],
-          parent: editorContainer,
-        };
-        break;
-      case "Receiver":
-        editorValues = {
-          doc: "// consumer.js\nconst amqp = require('amqplib/callback_api');\n\nconst rabbitmqUrl = 'amqp://mquser:mqpass@rabbit:5672';\n\namqp.connect(rabbitmqUrl, (error0, connection) => {\n\tif (error0) {\n\t\tthrow error0;\n\t}\n\tconnection.createChannel((error1, channel) => {\n\t\tif (error1) {\n\t\t\tthrow error1;\n\t\t}\n\n\t\tconst queue = 'hello';\n\n\t\tchannel.assertQueue(queue, {\n\t\t\tdurable: false\n\t\t});\n\n\t\tconsole.log(\" [*] Waiting for messages in %s. To exit press CTRL+C\", queue);\n\n\t\t// Funktion, um eine Nachricht aus der Queue zu konsumieren\n\t\tconst consumeMessage = () => {\n\t\t\tchannel.get(queue, { noAck: false }, (error, msg) => {\n\t\t\t\tif (error) {\n\t\t\t\t\tthrow error;\n\t\t\t\t}\n\t\t\t\tif (msg) {\n\t\t\t\t\tconsole.log(\" [x] Received '%s'\", msg.content.toString());\n\t\t\t\t\t// Nachricht bestätigen (acknowledge)\n\t\t\t\t\tchannel.ack(msg);\n\t\t\t\t} else {\n\t\t\t\t\tconsole.log(\" [x] No message received at this interval.\");\n\t\t\t\t}\n\t\t\t});\n\t\t};\n\n\t\t// Setze ein Intervall von 3 Sekunden\n\t\tsetInterval(consumeMessage, 3000);\n\t});\n});\n",
-          extensions: [basicSetup, javascript()],
-          parent: editorContainer,
-        };
-        break;
-      default:
-        editorValues = {
-          doc: "const amqp = require('amqplib/callback_api');\n\nconst rabbitmqUrl = 'amqp://mquser:mqpass@rabbit:5672';\n\namqp.connect(rabbitmqUrl, (error0, connection) => {\n    if (error0) {\n        throw error0;\n    }\n    connection.createChannel((error1, channel) => {\n        if (error1) {\n            throw error1;\n        }\n\n        //TODO: Code logic here\n});\n",
-          extensions: [basicSetup, javascript()],
-          parent: editorContainer,
-        };
-        break;
+    if (filterToCode.type.includes("Sender"))
+      editorValues = {
+        doc: "// publisher.js\nconst amqp = require('amqplib/callback_api');\n\nconst rabbitmqUrl = 'amqp://mquser:mqpass@rabbit:5672';\n\namqp.connect(rabbitmqUrl, (error0, connection) => {\n    if (error0) {\n        throw error0;\n    }\n    connection.createChannel((error1, channel) => {\n        if (error1) {\n            throw error1;\n        }\n\n        const queue = 'hello';\n\n        channel.assertQueue(queue, {\n            durable: false\n        });\n\n        const sendMessage = () => {\n            const msg = 'Hello World! ' + new Date().toISOString();\n            channel.sendToQueue(queue, Buffer.from(msg));\n            console.log(\" [x] Sent '%s'\", msg);\n        };\n\n        setInterval(sendMessage, 1000);\n    });\n});\n",
+        extensions: [basicSetup, javascript()],
+        parent: editorContainer,
+      };
+    else if (filterToCode.type.includes("Receiver")) {
+      editorValues = {
+        doc: "// consumer.js\nconst amqp = require('amqplib/callback_api');\n\nconst rabbitmqUrl = 'amqp://mquser:mqpass@rabbit:5672';\n\namqp.connect(rabbitmqUrl, (error0, connection) => {\n\tif (error0) {\n\t\tthrow error0;\n\t}\n\tconnection.createChannel((error1, channel) => {\n\t\tif (error1) {\n\t\t\tthrow error1;\n\t\t}\n\n\t\tconst queue = 'hello';\n\n\t\tchannel.assertQueue(queue, {\n\t\t\tdurable: false\n\t\t});\n\n\t\tconsole.log(\" [*] Waiting for messages in %s. To exit press CTRL+C\", queue);\n\n\t\t// Funktion, um eine Nachricht aus der Queue zu konsumieren\n\t\tconst consumeMessage = () => {\n\t\t\tchannel.get(queue, { noAck: false }, (error, msg) => {\n\t\t\t\tif (error) {\n\t\t\t\t\tthrow error;\n\t\t\t\t}\n\t\t\t\tif (msg) {\n\t\t\t\t\tconsole.log(\" [x] Received '%s'\", msg.content.toString());\n\t\t\t\t\t// Nachricht bestätigen (acknowledge)\n\t\t\t\t\tchannel.ack(msg);\n\t\t\t\t} else {\n\t\t\t\t\tconsole.log(\" [x] No message received at this interval.\");\n\t\t\t\t}\n\t\t\t});\n\t\t};\n\n\t\t// Setze ein Intervall von 3 Sekunden\n\t\tsetInterval(consumeMessage, 3000);\n\t});\n});\n",
+        extensions: [basicSetup, javascript()],
+        parent: editorContainer,
+      };
+    } else {
+      editorValues = {
+        doc: "const amqp = require('amqplib/callback_api');\n\nconst rabbitmqUrl = 'amqp://mquser:mqpass@rabbit:5672';\n\namqp.connect(rabbitmqUrl, (error0, connection) => {\n    if (error0) {\n        throw error0;\n    }\n    connection.createChannel((error1, channel) => {\n        if (error1) {\n            throw error1;\n        }\n\n        //TODO: Code logic here\n});\n",
+        extensions: [basicSetup, javascript()],
+        parent: editorContainer,
+      };
     }
     const editor = new EditorView(editorValues);
 

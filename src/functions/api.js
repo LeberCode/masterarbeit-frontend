@@ -1,6 +1,7 @@
 import axios from "axios";
 import { SERVER_URL } from "../config";
 import { loader, errorFeedback, successFeedback } from "./feedback";
+import { getScaleValues } from "./scaling";
 
 export const runCustomCode = () => {
   loader(true);
@@ -105,6 +106,7 @@ export const scaleOut = async (id) => {
       loader(false);
       if (response.status === 200) {
         successFeedback();
+        getScaleValues();
       } else {
         errorFeedback(response);
       }
@@ -114,4 +116,23 @@ export const scaleOut = async (id) => {
       errorFeedback(error);
       console.error(error);
     });
+};
+
+export const scaleValues = async () => {
+  loader(true);
+  try {
+    const response = await axios.get(`${SERVER_URL}/deployment/scaleValues`);
+    loader(false);
+
+    if (response.status === 200) {
+      successFeedback();
+      return response.data.result;
+    } else {
+      errorFeedback(response);
+    }
+  } catch (error) {
+    loader(false);
+    errorFeedback(error);
+    console.error(error);
+  }
 };

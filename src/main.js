@@ -11,6 +11,7 @@ import {
   restartCustomCode,
   clearArchitecture,
 } from "./functions/api";
+import { getScaleValues } from "./functions/scaling";
 
 function App() {
   const appState = (() => {
@@ -86,6 +87,7 @@ function App() {
     } else {
       restartCustomCode();
     }
+    getScaleValues();
     document.getElementById("Run").setAttribute("disabled", "disabled");
     document.getElementById("Stop").removeAttribute("disabled");
   });
