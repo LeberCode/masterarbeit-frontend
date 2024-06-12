@@ -33,16 +33,16 @@ export const initContextmenu = (instance) => {
     window.selectedFilter = $(event.currentTarget).attr("id");
     $(
       `<div style='display: flex; flex-direction: column;' class='custom-menu'>
-        <button style='border: none; padding: 6px 12px;' class='duplicate-filter'>
+        <button style='border: none; padding: 6px 12px; cursor: pointer;' class='duplicate-filter'>
           Duplicate Filter
         </button>
-        <button style='border: none; padding: 6px 12px;' class='code-filter'>
+        <button style='border: none; padding: 6px 12px; cursor: pointer;' class='code-filter'>
           Code Filter
         </button>
-        <button style='background-color: blue; color: white; border: none; padding: 6px 12px;' class='scale-out'>
+        <button style='background-color: blue; color: white; border: none; padding: 6px 12px; cursor: pointer;' class='scale-out'>
           SCALE OUT
         </button>
-        <button style='background-color: red; color: white; border: none; padding: 6px 12px;' class='delete-filter'>
+        <button style='background-color: red; color: white; border: none; padding: 6px 12px; cursor: pointer;' class='delete-filter'>
           Delete Filter
         </button>
       </div>"`
