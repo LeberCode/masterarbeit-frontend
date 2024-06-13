@@ -1,7 +1,7 @@
 import "./style.css";
 import { v4 as uuidv4 } from "uuid";
 import { jsPlumb } from "jsplumb";
-import { INTERCEPT_BEFORE_DROP, EVENT_DRAG_START } from "@jsplumb/browser-ui";
+import { INTERCEPT_BEFORE_DROP } from "@jsplumb/browser-ui";
 import { isConnectionAllowed } from "./functions/isConnectionAllowed";
 import { initContextmenu } from "./functions/contextmenu";
 import { createEndpoints } from "./functions/createEndpoint";
@@ -34,11 +34,6 @@ function App() {
         connector: ["Flowchart", { cornerRadius: 25 }],
       },
     });
-
-    // instance.bind(EVENT_DRAG_START, function (info) {
-    //   console.log("HI");
-    //   console.log(info);
-    // });
 
     // Überprüft ob die Connection valide ist
     instance.bind(INTERCEPT_BEFORE_DROP, function (info) {
