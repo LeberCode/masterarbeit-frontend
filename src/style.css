@@ -45,8 +45,11 @@
   text-align: center;
   align-content: center;
   position: absolute;
-  width: 60px;
-  height: 24px;
+  padding: 16px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  width: fit-content;
+  height: fit-content;
   border: 2px solid black;
   border-radius: 24px;
   cursor: grab;

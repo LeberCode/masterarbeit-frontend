@@ -4,7 +4,7 @@ import { jsPlumb } from "jsplumb";
 import { INTERCEPT_BEFORE_DROP } from "@jsplumb/browser-ui";
 import { isConnectionAllowed } from "./functions/isConnectionAllowed";
 import { initContextmenu } from "./functions/contextmenu";
-import { createEndpoints } from "./functions/createEndpoint";
+import { createEndpoints } from "./functions/endpoints";
 import {
   runCustomCode,
   stopCustomCode,

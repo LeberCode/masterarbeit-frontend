@@ -3,7 +3,7 @@ import { codeEditor } from "./codeEditor";
 import { scaleOut } from "./api";
 
 export const initContextmenu = (instance) => {
-  // Kontext Menü zum Löschen von Connections
+  // Kontext Menü für Connections
   instance.bind("contextmenu", (component, event) => {
     if (component.hasClass("jtk-connector")) {
       event.preventDefault();
@@ -27,7 +27,7 @@ export const initContextmenu = (instance) => {
     $("div.custom-menu").remove();
   });
 
-  // Kontext Menü zum Löschen von Filters
+  // Kontext Menü für Filter Filters
   $("body").on("contextmenu", "#Diagram .Filter", (event) => {
     event.preventDefault();
     window.selectedFilter = $(event.currentTarget).attr("id");
@@ -64,7 +64,7 @@ export const initContextmenu = (instance) => {
     scaleOut(window.selectedFilter);
   });
 
-  // Kontext Menü zum Löschen von Pipes
+  // Kontext Menü für Pipes
   $("body").on("contextmenu", "#Diagram .Pipe", (event) => {
     event.preventDefault();
     window.selectedPipe = $(event.currentTarget).attr("id");
@@ -87,5 +87,15 @@ export const initContextmenu = (instance) => {
   });
   $("body").on("click", ".duplicate-pipe", (event) => {
     duplicatePipe(instance);
+  });
+
+  $("body").on("dblclick", "#Diagram .Pipe", (event) => {
+    event.preventDefault();
+    window.selectedPipe = $(event.currentTarget);
+    let pipeName = prompt("Bitte geben Sie einen Pipe Namen ein:");
+    if (pipeName !== null) {
+      let currentHTML = window.selectedPipe.html();
+      window.selectedPipe.html(`${currentHTML} <br> ${pipeName}`);
+    }
   });
 };
