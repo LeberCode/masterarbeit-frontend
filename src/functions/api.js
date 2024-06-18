@@ -2,6 +2,7 @@ import axios from "axios";
 import { SERVER_URL } from "../config";
 import { loader, errorFeedback, successFeedback } from "./feedback";
 import { getScaleValues } from "./scaling";
+import { showDocker } from "./visualValidation";
 
 export const runCustomCode = () => {
   loader(true);
@@ -11,6 +12,7 @@ export const runCustomCode = () => {
       loader(false);
       if (response.status === 200) {
         successFeedback();
+        showDocker(window.selectedFilter);
       } else {
         errorFeedback(response);
       }
@@ -48,6 +50,7 @@ export const restartCustomCode = () => {
       loader(false);
       if (response.status === 200) {
         successFeedback();
+        showDocker(window.selectedFilter);
       } else {
         errorFeedback(response);
       }

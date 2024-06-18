@@ -12,6 +12,7 @@ import {
   clearArchitecture,
 } from "./functions/api";
 import { getScaleValues } from "./functions/scaling";
+import { showDocker } from "./functions/visualValidation";
 
 function App() {
   const appState = (() => {
@@ -78,6 +79,7 @@ function App() {
   document.getElementById("Run").addEventListener("click", () => {
     if (!appState.getState().beenPaused) {
       runCustomCode();
+      document.getElementById("Run").removeAttribute("disabled");
       appState.setBeenPaused(true);
     } else {
       restartCustomCode();

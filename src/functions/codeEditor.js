@@ -1,6 +1,7 @@
 import { basicSetup, EditorView } from "codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { createCustomCode } from "./api";
+import { showCheck } from "./visualValidation";
 
 export const codeEditor = (instance) => {
   if (document.getElementById(`codeEditor${window.selectedFilter}`)) {
@@ -20,7 +21,9 @@ export const codeEditor = (instance) => {
     editorContainer.appendChild(containerHeading);
 
     const filterToCode = {
-      type: document.getElementById(window.selectedFilter).innerHTML,
+      type: document
+        .getElementById(window.selectedFilter)
+        .innerHTML.split("\n")[1],
       id: window.selectedFilter,
     };
 
@@ -87,7 +90,9 @@ const handleCancel = (node) => {
 };
 const handleSubmit = (node, code) => {
   const requestBody = {
-    type: document.getElementById(window.selectedFilter).innerHTML,
+    type: document
+      .getElementById(window.selectedFilter)
+      .innerHTML.split("\n")[1],
     id: window.selectedFilter,
     code: code,
     isDeployed: false,
@@ -96,5 +101,6 @@ const handleSubmit = (node, code) => {
   };
   createCustomCode(requestBody);
   node.style.visibility = "hidden";
+  showCheck(window.selectedFilter);
   document.getElementById("Run").removeAttribute("disabled");
 };

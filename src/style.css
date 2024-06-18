@@ -251,3 +251,54 @@
   position: absolute;
   visibility: hidden;
 }
+
+#Diagram #Warning {
+  position: absolute;
+  left: -12px;
+  top: 0;
+  color: orange;
+  background-color: ghostwhite;
+}
+
+#Toolbox #Warning {
+  position: absolute;
+  visibility: hidden;
+}
+
+#Diagram #Check {
+  position: absolute;
+  left: -12px;
+  top: 0;
+  color: green;
+  background-color: ghostwhite;
+  visibility: hidden;
+}
+
+#Toolbox #Check {
+  position: absolute;
+  visibility: hidden;
+}
+
+#Diagram #Docker {
+  position: absolute;
+  left: -12px;
+  top: 0;
+  color: blue;
+  background-color: ghostwhite;
+  visibility: hidden;
+}
+
+#Toolbox #Docker {
+  position: absolute;
+  visibility: hidden;
+}
+
+.fa-circle-exclamation:before {
+  background-color: ghostwhite;
+}
+.fa-circle-check:before {
+  background-color: ghostwhite;
+}
+.fa-docker:before {
+  background-color: ghostwhite;
+}
