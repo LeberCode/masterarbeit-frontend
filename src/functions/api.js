@@ -12,7 +12,7 @@ export const runCustomCode = () => {
       loader(false);
       if (response.status === 200) {
         successFeedback();
-        showDocker(window.selectedFilter);
+        showDocker();
       } else {
         errorFeedback(response);
       }
@@ -50,7 +50,7 @@ export const restartCustomCode = () => {
       loader(false);
       if (response.status === 200) {
         successFeedback();
-        showDocker(window.selectedFilter);
+        showDocker();
       } else {
         errorFeedback(response);
       }

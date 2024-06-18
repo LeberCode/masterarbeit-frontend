@@ -12,7 +12,6 @@ import {
   clearArchitecture,
 } from "./functions/api";
 import { getScaleValues } from "./functions/scaling";
-import { showDocker } from "./functions/visualValidation";
 
 function App() {
   const appState = (() => {

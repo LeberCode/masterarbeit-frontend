@@ -52,3 +52,26 @@ export const duplicateFilter = (instance) => {
   instance.draggable(newFilter.id, { containment: true });
   createEndpoints(instance, newFilter.id, newFilter.dataset.type);
 };
+
+export const extendPipe = () => {
+  let pipeName = prompt("Bitte geben Sie einen Pipe Namen ein:");
+  const pipeToName = document.getElementById(window.selectedPipe);
+  if (pipeToName) {
+    var textIndex = pipeToName.innerHTML.indexOf("Queue");
+    textIndex === -1
+      ? (textIndex = pipeToName.innerHTML.indexOf("Topic"))
+      : null;
+
+    if (textIndex !== -1) {
+      var beforeQueue = pipeToName.innerHTML.slice(
+        0,
+        textIndex + "Queue".length
+      );
+      var afterQueue = pipeToName.innerHTML.slice(textIndex + "Queue".length);
+
+      var newContent = beforeQueue + `<br> "${pipeName}"` + afterQueue;
+
+      pipeToName.innerHTML = newContent;
+    }
+  }
+};

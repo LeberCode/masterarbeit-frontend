@@ -1,6 +1,7 @@
-import { duplicatePipe, duplicateFilter } from "./duplication";
+import { duplicatePipe, duplicateFilter, extendPipe } from "./duplication";
 import { codeEditor } from "./codeEditor";
 import { scaleOut } from "./api";
+import { showCheck } from "./visualValidation";
 
 export const initContextmenu = (instance) => {
   // Kontext Menü für Connections
@@ -70,6 +71,9 @@ export const initContextmenu = (instance) => {
     window.selectedPipe = $(event.currentTarget).attr("id");
     $(
       `<div style='display: flex; flex-direction: column;' class='custom-menu'>
+        <button style='border: none; padding: 6px 12px;' class='name-pipe'>
+          Name Pipe
+        </button>
         <button style='border: none; padding: 6px 12px;' class='duplicate-pipe'>
           Duplicate Pipe
         </button>
@@ -88,14 +92,8 @@ export const initContextmenu = (instance) => {
   $("body").on("click", ".duplicate-pipe", (event) => {
     duplicatePipe(instance);
   });
-
-  $("body").on("dblclick", "#Diagram .Pipe", (event) => {
-    event.preventDefault();
-    window.selectedPipe = $(event.currentTarget);
-    let pipeName = prompt("Bitte geben Sie einen Pipe Namen ein:");
-    if (pipeName !== null) {
-      let currentHTML = window.selectedPipe.html();
-      window.selectedPipe.html(`${currentHTML} <br> ${pipeName}`);
-    }
+  $("body").on("click", ".name-pipe", (event) => {
+    extendPipe();
+    showCheck(window.selectedPipe);
   });
 };
