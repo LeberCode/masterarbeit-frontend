@@ -17,7 +17,9 @@ export const showCheck = (id) => {
   dockerDomElement.style.visibility = "hidden";
 };
 export const showDocker = () => {
-  let elementsToHide = document.querySelectorAll("#Warning, #Check");
+  let elementsToHide = document.querySelectorAll(
+    "#Diagram #Warning, #Diagram #Check"
+  );
   elementsToHide.forEach((element) => (element.style.visibility = "hidden"));
 
   let elementsToShow = document.querySelectorAll("#Diagram #Docker");
