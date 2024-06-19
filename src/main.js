@@ -33,6 +33,11 @@ function App() {
       if (!isConnectionAllowed(source, target)) {
         return false;
       }
+      if (source.getAttribute("class").includes("Filter")) {
+        appState.addConnection(source.id, target.id);
+      } else {
+        appState.addConnection(target.id, source.id);
+      }
       return true;
     });
 

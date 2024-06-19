@@ -55,7 +55,7 @@ export const duplicateFilter = (instance) => {
 };
 
 export const extendPipe = () => {
-  let pipeName = prompt("Bitte geben Sie einen Pipe Namen ein:");
+  let newPipeName = prompt("Bitte geben Sie einen Pipe Namen ein:");
   const pipeToName = document.getElementById(window.selectedPipe);
   if (pipeToName) {
     var textIndex = pipeToName.innerHTML.indexOf("Queue");
@@ -70,9 +70,10 @@ export const extendPipe = () => {
       );
       var afterQueue = pipeToName.innerHTML.slice(textIndex + "Queue".length);
 
-      var newContent = beforeQueue + `<br> "${pipeName}"` + afterQueue;
+      var newContent = beforeQueue + `<br> "${newPipeName}"` + afterQueue;
 
       pipeToName.innerHTML = newContent;
     }
+    appState.addPipe(pipeToName.id, newPipeName);
   }
 };
