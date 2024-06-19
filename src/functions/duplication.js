@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import { createEndpoints } from "./endpoints";
+import { appState } from "./state";
 
 export const duplicatePipe = (instance) => {
   var selectedPipe = document.getElementById(window.selectedPipe);

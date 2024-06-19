@@ -5,6 +5,7 @@ import { INTERCEPT_BEFORE_DROP } from "@jsplumb/browser-ui";
 import { isConnectionAllowed } from "./functions/isConnectionAllowed";
 import { initContextmenu } from "./functions/contextmenu";
 import { createEndpoints } from "./functions/endpoints";
+import { appState } from "./functions/state";
 import {
   runCustomCode,
   stopCustomCode,
@@ -14,16 +15,6 @@ import {
 import { getScaleValues } from "./functions/scaling";
 
 function App() {
-  const appState = (() => {
-    let state = {
-      beenPaused: false,
-    };
-
-    return {
-      getState: () => state,
-      setBeenPaused: (beenPaused) => (state.beenPaused = beenPaused),
-    };
-  })();
   const instance = jsPlumb.getInstance({});
   instance.setContainer("diagram");
   instance.ready(() => {
