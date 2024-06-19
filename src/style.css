@@ -317,3 +317,8 @@
 .fa-docker:before {
   background-color: ghostwhite;
 }
+
+.pipes {
+  display: flex;
+  justify-content: space-between;
+}
