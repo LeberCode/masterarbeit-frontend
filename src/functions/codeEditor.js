@@ -103,5 +103,5 @@ const handleSubmit = (node, code) => {
   createCustomCode(requestBody);
   node.style.visibility = "hidden";
   showCheck(window.selectedFilter);
-  document.getElementById("Run").removeAttribute("disabled");
+  document.getElementById("Deploy").removeAttribute("disabled");
 };

@@ -25,3 +25,13 @@ export const showDocker = () => {
   let elementsToShow = document.querySelectorAll("#Diagram #Docker");
   elementsToShow.forEach((element) => (element.style.visibility = "visible"));
 };
+
+export const showAllWarning = () => {
+  let elementsToHide = document.querySelectorAll(
+    "#Diagram #Docker, #Diagram #Check"
+  );
+  elementsToHide.forEach((element) => (element.style.visibility = "hidden"));
+
+  let elementsToShow = document.querySelectorAll("#Diagram #Warning");
+  elementsToShow.forEach((element) => (element.style.visibility = "visible"));
+};

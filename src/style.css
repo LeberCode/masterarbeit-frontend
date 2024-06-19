@@ -149,11 +149,11 @@
   font-weight: bold;
 }
 
-#Run {
+#Deploy {
   position: absolute;
   right: 90px;
   top: 24px;
-  width: 60px;
+  width: 72px;
   background-color: #04aa6d;
   border: 1px black solid;
   border-radius: 4px;
@@ -163,11 +163,11 @@
   cursor: pointer;
 }
 
-#Stop {
+#Pause {
   position: absolute;
   right: 12px;
   top: 24px;
-  width: 60px;
+  width: 72px;
   background-color: red;
   border: 1px black solid;
   border-radius: 4px;
@@ -176,7 +176,8 @@
   padding-bottom: 6px;
   cursor: pointer;
 }
-#ClearArchitecture {
+
+#ClearModel {
   position: absolute;
   left: 12px;
   top: 24px;
@@ -190,15 +191,29 @@
   cursor: pointer;
 }
 
-#Stop:disabled {
-  cursor: not-allowed;
-  background-color: lightgray;
-  color: black;
+#KillDeployment {
+  position: absolute;
+  left: 144px;
+  top: 24px;
+  width: 120px;
+  background-color: lightblue;
+  border: 1px black solid;
+  border-radius: 4px;
+  padding: 12px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  cursor: pointer;
 }
-#Run:disabled {
+
+#Pause:disabled {
   cursor: not-allowed;
   background-color: lightgray;
-  color: black;
+  color: rgba(0, 0, 0, 0.5);
+}
+#Deploy:disabled {
+  cursor: not-allowed;
+  background-color: lightgray;
+  color: rgba(0, 0, 0, 0.5);
 }
 
 #Loader {

@@ -13,6 +13,7 @@ import {
   clearArchitecture,
 } from "./functions/api";
 import { getScaleValues } from "./functions/scaling";
+import { showAllWarning } from "./functions/visualValidation";
 
 function App() {
   const instance = jsPlumb.getInstance({});
@@ -71,38 +72,50 @@ function App() {
     initContextmenu(instance);
   });
 
-  document.getElementById("Run").addEventListener("click", () => {
+  const deployElement = document.getElementById("Deploy");
+  const pauseElement = document.getElementById("Pause");
+  const clearModelElement = document.getElementById("ClearModel");
+  const killDeploymentElement = document.getElementById("KillDeployment");
+
+  deployElement.addEventListener("click", () => {
     if (!appState.getState().beenPaused) {
       runCustomCode();
-      document.getElementById("Run").removeAttribute("disabled");
+      deployElement.removeAttribute("disabled");
       appState.setBeenPaused(true);
     } else {
       restartCustomCode();
     }
     getScaleValues();
-    document.getElementById("Run").setAttribute("disabled", "disabled");
-    document.getElementById("Stop").removeAttribute("disabled");
+    deployElement.setAttribute("disabled", "disabled");
+    pauseElement.removeAttribute("disabled");
+    killDeploymentElement.disabled = false;
+    clearModelElement.disabled = true;
   });
 
-  document.getElementById("Stop").addEventListener("click", () => {
+  pauseElement.addEventListener("click", () => {
     stopCustomCode();
-    document.getElementById("Stop").setAttribute("disabled", "disabled");
-    document.getElementById("Run").removeAttribute("disabled");
+    pauseElement.setAttribute("disabled", "disabled");
+    deployElement.removeAttribute("disabled");
   });
-  document.getElementById("Stop").setAttribute("disabled", "disabled");
-  document.getElementById("Run").setAttribute("disabled", "disabled");
+  pauseElement.setAttribute("disabled", "disabled");
+  deployElement.setAttribute("disabled", "disabled");
 
-  document
-    .getElementById("ClearArchitecture")
-    .addEventListener("click", async () => {
-      await clearArchitecture();
-      let elements = document.querySelectorAll(
-        "#Diagram .Filter, #Diagram .Pipe, .jtk-endpoint, .jtk-connector"
-      );
-      elements.forEach((element) => element.remove());
-      document.getElementById("Stop").setAttribute("disabled", "disabled");
-      document.getElementById("Run").setAttribute("disabled", "disabled");
-    });
+  clearModelElement.addEventListener("click", async () => {
+    let elements = document.querySelectorAll(
+      "#Diagram .Filter, #Diagram .Pipe, .jtk-endpoint, .jtk-connector"
+    );
+    elements.forEach((element) => element.remove());
+  });
+
+  killDeploymentElement.addEventListener("click", async () => {
+    await clearArchitecture();
+    pauseElement.setAttribute("disabled", "disabled");
+    deployElement.setAttribute("disabled", "disabled");
+    clearModelElement.disabled = false;
+    killDeploymentElement.disabled = true;
+    await getScaleValues();
+    showAllWarning();
+  });
 }
 
 App();
