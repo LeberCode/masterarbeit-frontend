@@ -20,18 +20,27 @@ export const getPipesForFilter = () => {
 
 export const handlePipeBinding = (pipeMapping, editor) => {
   let lineNumber = 14;
+  let editorCodeText = editor.state.doc.toString();
   pipeMapping.forEach((pipe) => {
-    let line = editor.state.doc.line(lineNumber);
-    let position = line.from;
-    let transaction = editor.state.update({
-      changes: {
-        from: position,
-        insert: `\t\tconst ${pipe.pipeName.replace(/\s+/g, "")} = "${
-          pipe.pipeName
-        }"\n`,
-      },
-    });
-    editor.dispatch(transaction);
-    lineNumber++;
+    if (
+      editorCodeText.includes(
+        `const ${pipe.pipeName.replace(/\s+/g, "")} = "${pipe.pipeName}"`
+      )
+    ) {
+      return;
+    } else {
+      let line = editor.state.doc.line(lineNumber);
+      let position = line.from;
+      let transaction = editor.state.update({
+        changes: {
+          from: position,
+          insert: `\t\tconst ${pipe.pipeName.replace(/\s+/g, "")} = "${
+            pipe.pipeName
+          }"\n`,
+        },
+      });
+      editor.dispatch(transaction);
+      lineNumber++;
+    }
   });
 };
