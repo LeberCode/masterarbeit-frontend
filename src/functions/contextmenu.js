@@ -1,5 +1,5 @@
 import { duplicatePipe, duplicateFilter, extendPipe } from "./duplication";
-import { codeEditor } from "./codeEditor";
+import { codeEditorElement } from "./codeEditor";
 import { scaleOut } from "./api";
 import { showCheck } from "./visualValidation";
 
@@ -59,7 +59,7 @@ export const initContextmenu = (instance) => {
     duplicateFilter(instance);
   });
   $("body").on("click", ".code-filter", (event) => {
-    codeEditor(instance);
+    codeEditorElement(instance);
   });
   $("body").on("click", ".scale-out", (event) => {
     scaleOut(window.selectedFilter);
