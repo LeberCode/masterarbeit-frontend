@@ -9,7 +9,10 @@ export const appState = (() => {
     getState: () => state,
     setBeenPaused: (beenPaused) => (state.beenPaused = beenPaused),
     addConnection: (con1, con2) => {
-      state.connections.set(con1, con2);
+      if (!state.connections.has(con1)) {
+        state.connections.set(con1, []);
+      }
+      state.connections.get(con1).push(con2);
     },
     removeConnection: (con1) => {
       state.connections.delete(con1);

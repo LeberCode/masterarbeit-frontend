@@ -35,9 +35,15 @@ function App() {
         return false;
       }
       if (source.getAttribute("class").includes("Filter")) {
-        appState.addConnection(source.id, target.id);
+        appState.addConnection(source.id, {
+          pipeId: target.id,
+          direction: "out",
+        });
       } else {
-        appState.addConnection(target.id, source.id);
+        appState.addConnection(target.id, {
+          pipeId: source.id,
+          direction: "in",
+        });
       }
       return true;
     });

@@ -6,7 +6,7 @@ export const duplicatePipe = (instance) => {
   var selectedPipe = document.getElementById(window.selectedPipe);
 
   var newPipe = document.createElement("div");
-  var pipeText = document.createTextNode(selectedPipe.innerHTML);
+  var pipeText = document.createTextNode(selectedPipe.innerHTML.split("\n")[1]);
   newPipe.appendChild(pipeText);
   newPipe.id = uuidv4();
   newPipe.classList.add("Pipe");
@@ -32,7 +32,9 @@ export const duplicateFilter = (instance) => {
   var selectedFilter = document.getElementById(window.selectedFilter);
 
   var newFilter = document.createElement("div");
-  var filterText = document.createTextNode(selectedFilter.innerHTML);
+  var filterText = document.createTextNode(
+    selectedFilter.innerHTML.split("\n")[1]
+  );
   newFilter.appendChild(filterText);
   newFilter.id = uuidv4();
   newFilter.classList.add("Filter");

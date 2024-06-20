@@ -2,6 +2,11 @@ import { basicSetup, EditorView } from "codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { createCustomCode } from "./api";
 import { showCheck } from "./visualValidation";
+import {
+  createPipesElements,
+  getPipesForFilter,
+  createPipeButtons,
+} from "./pipeBinding";
 
 export const codeEditor = (instance) => {
   if (document.getElementById(`codeEditor${window.selectedFilter}`)) {
@@ -9,6 +14,7 @@ export const codeEditor = (instance) => {
       `codeEditor${window.selectedFilter}`
     );
     codeEditor.style.visibility = "visible";
+    createPipeButtons(getPipesForFilter());
   } else {
     var diagram = document.getElementById("Diagram");
 
@@ -18,30 +24,13 @@ export const codeEditor = (instance) => {
 
     const containerHeading = document.createElement("h4");
     containerHeading.appendChild(document.createTextNode("CODE EDITOR"));
+    containerHeading.style.marginTop = "6px";
+    containerHeading.style.marginBottom = "0px";
     editorContainer.appendChild(containerHeading);
 
-    const pipesDiv = document.createElement("div");
-    pipesDiv.classList.add("pipes");
+    diagram.appendChild(editorContainer);
 
-    const incomingPipesDiv = document.createElement("div");
-    const incomingPipesHeading = document.createElement("h5");
-    incomingPipesHeading.appendChild(document.createTextNode("Incoming Pipes"));
-    incomingPipesDiv.appendChild(incomingPipesHeading);
-
-    // TODO: for each pipe in incomingPipes usw...
-    // const pipeButton = document.createElement("button");
-    // pipeButton.appendChild(document.createTextNode("[Pipe Name 123]"));
-    // incomingPipesDiv.appendChild(pipeButton);
-
-    const outgoingPipesDiv = document.createElement("div");
-    const outgoingPipesHeading = document.createElement("h5");
-    outgoingPipesHeading.appendChild(document.createTextNode("Outgoing Pipes"));
-    outgoingPipesDiv.appendChild(outgoingPipesHeading);
-
-    pipesDiv.appendChild(incomingPipesDiv);
-    pipesDiv.appendChild(outgoingPipesDiv);
-
-    editorContainer.appendChild(pipesDiv);
+    createPipesElements();
 
     const filterToCode = {
       type: document
@@ -103,7 +92,6 @@ export const codeEditor = (instance) => {
     buttonContainer.appendChild(submitButton);
     editorContainer.appendChild(buttonContainer);
 
-    diagram.appendChild(editorContainer);
     instance.draggable(editorContainer.id);
   }
 };
