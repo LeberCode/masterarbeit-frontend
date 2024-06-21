@@ -1,15 +1,23 @@
 import { appState } from "./state";
-import { errorFeedbackSimple } from "./feedback";
+import { showCheck } from "./visualValidation";
 
 export const getPipesForFilter = () => {
   const filter = window.selectedFilter;
   const connections = appState.getConnection(filter);
   const pipeMapping = [];
+  let defaultCount = 1;
   connections &&
     connections.forEach((connection) => {
       const pipeName = appState.getPipe(connection);
       if (!pipeName) {
-        errorFeedbackSimple("Name Your Pipes!");
+        const pipeName = `Default${defaultCount}`;
+        appState.addPipe(connection, pipeName);
+        const pipe = { pipeName, connection };
+        pipeMapping.push(pipe);
+        const spanToChange = document.querySelector(`#${connection} #PipeName`);
+        spanToChange.innerHTML = `"${pipeName}"`;
+        showCheck(connection);
+        defaultCount++;
       } else {
         const pipe = { pipeName, connection };
         pipeMapping.push(pipe);
@@ -24,7 +32,7 @@ export const handlePipeBinding = (pipeMapping, editor) => {
   pipeMapping.forEach((pipe) => {
     if (
       editorCodeText.includes(
-        `const ${pipe.pipeName.replace(/\s+/g, "")}Pipea = "${pipe.pipeName}"`
+        `const ${pipe.pipeName.replace(/\s+/g, "")}Pipe = "${pipe.pipeName}"`
       )
     ) {
       return;
