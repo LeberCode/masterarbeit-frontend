@@ -7,11 +7,11 @@ export const getPipesForFilter = () => {
   const pipeMapping = [];
   connections &&
     connections.forEach((connection) => {
-      const pipeName = appState.getPipe(connection.pipeId);
+      const pipeName = appState.getPipe(connection);
       if (!pipeName) {
         errorFeedbackSimple("Name Your Pipes!");
       } else {
-        const pipe = { pipeName, ...connection };
+        const pipe = { pipeName, connection };
         pipeMapping.push(pipe);
       }
     });

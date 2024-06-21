@@ -17,6 +17,16 @@ export const appState = (() => {
     removeConnection: (con1) => {
       state.connections.delete(con1);
     },
+    removeConnectionValue: (value) => {
+      for (let [key, values] of state.connections) {
+        const newValues = values.filter((val) => val !== value);
+        if (newValues.length === 0) {
+          state.connections.delete(key);
+        } else {
+          state.connections.set(key, newValues);
+        }
+      }
+    },
     getConnection: (con1) => {
       return state.connections.get(con1);
     },

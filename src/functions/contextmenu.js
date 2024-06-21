@@ -55,6 +55,7 @@ export const initContextmenu = (instance) => {
 
   $("body").on("click", ".delete-filter", (event) => {
     instance.remove(window.selectedFilter);
+    appState.removeConnection(window.selectedFilter);
   });
   $("body").on("click", ".duplicate-filter", (event) => {
     duplicateFilter(instance);
@@ -72,13 +73,13 @@ export const initContextmenu = (instance) => {
     window.selectedPipe = $(event.currentTarget).attr("id");
     $(
       `<div style='display: flex; flex-direction: column;' class='custom-menu'>
-        <button style='border: none; padding: 6px 12px;' class='name-pipe'>
+        <button style='border: none; padding: 6px 12px; cursor: pointer;' class='name-pipe'>
           Name Pipe
         </button>
-        <button style='border: none; padding: 6px 12px;' class='duplicate-pipe'>
+        <button style='border: none; padding: 6px 12px; cursor: pointer;' class='duplicate-pipe'>
           Duplicate Pipe
         </button>
-        <button style='background-color: red; color: white; border: none; padding: 6px 12px;' class='delete-pipe'>
+        <button style='background-color: red; color: white; border: none; padding: 6px 12px; cursor: pointer;' class='delete-pipe'>
           Delete Pipe
         </button>
       </div>`
@@ -90,6 +91,7 @@ export const initContextmenu = (instance) => {
   $("body").on("click", ".delete-pipe", (event) => {
     instance.remove(window.selectedPipe);
     appState.removePipe(window.selectedPipe);
+    appState.removeConnectionValue(window.selectedPipe);
   });
   $("body").on("click", ".duplicate-pipe", (event) => {
     duplicatePipe(instance);
