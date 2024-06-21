@@ -98,6 +98,5 @@ export const initContextmenu = (instance) => {
   });
   $("body").on("click", ".name-pipe", (event) => {
     extendPipe();
-    showCheck(window.selectedPipe);
   });
 };

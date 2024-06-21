@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { createEndpoints } from "./endpoints";
 import { appState } from "./state";
-import { showWarning } from "./visualValidation";
+import { showWarning, showCheck } from "./visualValidation";
 import { coorectId } from "./id";
 
 export const duplicatePipe = (instance) => {
@@ -76,5 +76,6 @@ export const extendPipe = () => {
       `#${window.selectedPipe} #PipeName`
     );
     spanToChange.innerHTML = `"${newPipeName}"`;
+    showCheck(window.selectedPipe);
   }
 };
