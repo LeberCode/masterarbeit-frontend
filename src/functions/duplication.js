@@ -2,13 +2,13 @@ import { v4 as uuidv4 } from "uuid";
 import { createEndpoints } from "./endpoints";
 import { appState } from "./state";
 import { showWarning } from "./visualValidation";
-import { shortenId } from "./id";
+import { coorectId } from "./id";
 
 export const duplicatePipe = (instance) => {
   const selectedPipe = document.getElementById(window.selectedPipe);
 
   const newPipe = selectedPipe.cloneNode(true);
-  newPipe.id = shortenId(uuidv4());
+  newPipe.id = coorectId(uuidv4());
 
   const top = selectedPipe.offsetTop + 36;
   const topStr = top.toString() + "px";
@@ -31,7 +31,7 @@ export const duplicateFilter = (instance) => {
   const selectedFilter = document.getElementById(window.selectedFilter);
 
   const newFilter = selectedFilter.cloneNode(true);
-  newFilter.id = shortenId(uuidv4());
+  newFilter.id = coorectId(uuidv4());
 
   const top = selectedFilter.offsetTop + 48;
   const topStr = top.toString() + "px";
