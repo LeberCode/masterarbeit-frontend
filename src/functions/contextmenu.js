@@ -2,6 +2,7 @@ import { duplicatePipe, duplicateFilter, extendPipe } from "./duplication";
 import { codeEditorElement } from "./codeEditor";
 import { scaleOut } from "./api";
 import { showCheck } from "./visualValidation";
+import { appState } from "./state";
 
 export const initContextmenu = (instance) => {
   // Kontext Menü für Connections
@@ -88,6 +89,7 @@ export const initContextmenu = (instance) => {
 
   $("body").on("click", ".delete-pipe", (event) => {
     instance.remove(window.selectedPipe);
+    appState.removePipe(window.selectedPipe);
   });
   $("body").on("click", ".duplicate-pipe", (event) => {
     duplicatePipe(instance);
