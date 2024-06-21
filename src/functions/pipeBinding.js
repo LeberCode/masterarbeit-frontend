@@ -39,16 +39,25 @@ export const handlePipeBinding = (pipeMapping, editor) => {
     } else {
       let line = editor.state.doc.line(lineNumber);
       let position = line.from;
+      let pipeNameUserGiven = pipe.pipeName;
+      let pipeNameDeklaration = transformPipeName(pipeNameUserGiven);
+      pipeNameUserGiven.replace(/\s+/g, "");
+      let insertCode = `\t\tconst ${pipeNameDeklaration} = "${pipeNameUserGiven}"\n\t\tawait channel.assertQueue(${pipeNameDeklaration}, {\n\t\t\tdurable: false\n\t\t});\n`;
       let transaction = editor.state.update({
         changes: {
           from: position,
-          insert: `\t\tconst ${pipe.pipeName.replace(/\s+/g, "")}Pipe = "${
-            pipe.pipeName
-          }"\n`,
+          insert: insertCode,
         },
       });
       editor.dispatch(transaction);
       lineNumber++;
     }
   });
+};
+
+const transformPipeName = (str) => {
+  if (!str) return str;
+  const noSpacesStr = str.replace(/\s+/g, "");
+  if (noSpacesStr.length === 0) return "";
+  return noSpacesStr.charAt(0).toLowerCase() + noSpacesStr.slice(1);
 };
