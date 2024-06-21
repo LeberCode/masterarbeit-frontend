@@ -40,7 +40,7 @@ export const handlePipeBinding = (pipeMapping, editor) => {
       let line = editor.state.doc.line(lineNumber);
       let position = line.from;
       let pipeNameUserGiven = pipe.pipeName;
-      let pipeNameDeklaration = transformPipeName(pipeNameUserGiven);
+      let pipeNameDeklaration = makeValidConstName(pipeNameUserGiven);
       pipeNameUserGiven.replace(/\s+/g, "");
       let insertCode = `\t\tconst ${pipeNameDeklaration} = "${pipeNameUserGiven}"\n\t\tawait channel.assertQueue(${pipeNameDeklaration}, {\n\t\t\tdurable: false\n\t\t});\n`;
       let transaction = editor.state.update({
@@ -55,9 +55,43 @@ export const handlePipeBinding = (pipeMapping, editor) => {
   });
 };
 
-const transformPipeName = (str) => {
-  if (!str) return str;
-  const noSpacesStr = str.replace(/\s+/g, "");
-  if (noSpacesStr.length === 0) return "";
-  return noSpacesStr.charAt(0).toLowerCase() + noSpacesStr.slice(1);
+const makeValidConstName = (str) => {
+  // Entferne nicht erlaubte Zeichen, nur Buchstaben, Zahlen, _ und $ sind erlaubt
+  let validStr = str.replace(/[^a-zA-Z0-9_$]/g, "");
+
+  // Stelle sicher, dass der Name nicht mit einer Zahl beginnt
+  if (/^[0-9]/.test(validStr)) {
+    validStr = "_" + validStr;
+  }
+
+  // Überprüfen und anpassen, falls der Name ein reserviertes Wort ist (einfaches Beispiel)
+  const reservedWords = new Set([
+    "var",
+    "let",
+    "const",
+    "function",
+    "if",
+    "else",
+    "for",
+    "while",
+    "return",
+    "null",
+    "true",
+    "false",
+    "new",
+    "class",
+    "import",
+    "export",
+    "default",
+  ]);
+  if (reservedWords.has(validStr)) {
+    validStr = "_" + validStr;
+  }
+
+  // Fallback, falls der String nach Entfernen aller ungültigen Zeichen leer ist
+  if (validStr.length === 0) {
+    validStr = "_const";
+  }
+
+  return validStr;
 };
