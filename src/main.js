@@ -14,6 +14,7 @@ import {
 } from "./functions/api";
 import { getScaleValues } from "./functions/scaling";
 import { showAllWarning } from "./functions/visualValidation";
+import { shortenId } from "./functions/id";
 
 function App() {
   const instance = jsPlumb.getInstance({});
@@ -61,7 +62,7 @@ function App() {
     // Diagramm DIV droppable machen
     $("#Diagram").droppable({
       drop: function (event, ui) {
-        var id = uuidv4();
+        var id = shortenId(uuidv4());
         var clone = $(ui.helper).clone(true);
         clone.attr("id", id);
         clone.appendTo(this);
