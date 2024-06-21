@@ -3,25 +3,21 @@ import { createEndpoints } from "./endpoints";
 import { appState } from "./state";
 
 export const duplicatePipe = (instance) => {
-  var selectedPipe = document.getElementById(window.selectedPipe);
+  const selectedPipe = document.getElementById(window.selectedPipe);
 
-  var newPipe = document.createElement("div");
-  var pipeText = document.createTextNode(selectedPipe.innerHTML.split("\n")[1]);
-  newPipe.appendChild(pipeText);
+  const newPipe = selectedPipe.cloneNode(true);
   newPipe.id = uuidv4();
-  newPipe.classList.add("Pipe");
-  newPipe.dataset.type = selectedPipe.dataset.type;
 
-  var top = selectedPipe.offsetTop + 36;
-  var topStr = top.toString() + "px";
+  const top = selectedPipe.offsetTop + 36;
+  const topStr = top.toString() + "px";
 
-  var left = selectedPipe.offsetLeft + 48;
-  var leftStr = left.toString() + "px";
+  const left = selectedPipe.offsetLeft + 48;
+  const leftStr = left.toString() + "px";
 
   newPipe.style.top = topStr;
   newPipe.style.left = leftStr;
 
-  var container = document.getElementById("Diagram");
+  const container = document.getElementById("Diagram");
   container.appendChild(newPipe);
 
   instance.draggable(newPipe.id, { containment: true });
@@ -29,27 +25,21 @@ export const duplicatePipe = (instance) => {
 };
 
 export const duplicateFilter = (instance) => {
-  var selectedFilter = document.getElementById(window.selectedFilter);
+  const selectedFilter = document.getElementById(window.selectedFilter);
 
-  var newFilter = document.createElement("div");
-  var filterText = document.createTextNode(
-    selectedFilter.innerHTML.split("\n")[1]
-  );
-  newFilter.appendChild(filterText);
+  const newFilter = selectedFilter.cloneNode(true);
   newFilter.id = uuidv4();
-  newFilter.classList.add("Filter");
-  newFilter.dataset.type = selectedFilter.dataset.type;
 
-  var top = selectedFilter.offsetTop + 48;
-  var topStr = top.toString() + "px";
+  const top = selectedFilter.offsetTop + 48;
+  const topStr = top.toString() + "px";
 
-  var left = selectedFilter.offsetLeft + 72;
-  var leftStr = left.toString() + "px";
+  const left = selectedFilter.offsetLeft + 72;
+  const leftStr = left.toString() + "px";
 
   newFilter.style.top = topStr;
   newFilter.style.left = leftStr;
 
-  var container = document.getElementById("Diagram");
+  const container = document.getElementById("Diagram");
   container.appendChild(newFilter);
 
   instance.draggable(newFilter.id, { containment: true });
