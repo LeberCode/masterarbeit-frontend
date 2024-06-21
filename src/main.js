@@ -14,7 +14,7 @@ import {
 } from "./functions/api";
 import { getScaleValues } from "./functions/scaling";
 import { showAllWarning } from "./functions/visualValidation";
-import { shortenId } from "./functions/id";
+import { coorectId } from "./functions/id";
 
 function App() {
   const instance = jsPlumb.getInstance({});
