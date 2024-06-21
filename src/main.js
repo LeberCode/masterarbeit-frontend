@@ -11,6 +11,7 @@ import {
   stopCustomCode,
   restartCustomCode,
   clearArchitecture,
+  clearModel,
 } from "./functions/api";
 import { getScaleValues } from "./functions/scaling";
 import { showAllWarning } from "./functions/visualValidation";
@@ -106,6 +107,7 @@ function App() {
       "#Diagram .Filter, #Diagram .Pipe, .jtk-endpoint, .jtk-connector"
     );
     elements.forEach((element) => element.remove());
+    await clearModel();
   });
 
   killDeploymentElement.addEventListener("click", async () => {

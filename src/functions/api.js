@@ -100,6 +100,25 @@ export const clearArchitecture = async () => {
     });
 };
 
+export const clearModel = async () => {
+  loader(true);
+  await axios
+    .get(`${SERVER_URL}/customCode/clear`)
+    .then((response) => {
+      loader(false);
+      if (response.status === 200) {
+        successFeedback();
+      } else {
+        errorFeedback(response);
+      }
+    })
+    .catch((error) => {
+      loader(false);
+      errorFeedback(error);
+      console.error(error);
+    });
+};
+
 export const scaleOut = async (id) => {
   const requestBody = { id };
   loader(true);
