@@ -62,7 +62,7 @@ function App() {
     // Diagramm DIV droppable machen
     $("#Diagram").droppable({
       drop: function (event, ui) {
-        var id = shortenId(uuidv4());
+        var id = coorectId(uuidv4());
         var clone = $(ui.helper).clone(true);
         clone.attr("id", id);
         clone.appendTo(this);
