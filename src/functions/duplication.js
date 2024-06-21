@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { createEndpoints } from "./endpoints";
 import { appState } from "./state";
+import { showWarning } from "./visualValidation";
 
 export const duplicatePipe = (instance) => {
   const selectedPipe = document.getElementById(window.selectedPipe);
@@ -19,6 +20,7 @@ export const duplicatePipe = (instance) => {
 
   const container = document.getElementById("Diagram");
   container.appendChild(newPipe);
+  showWarning(newPipe.id);
 
   instance.draggable(newPipe.id, { containment: true });
   createEndpoints(instance, newPipe.id, newPipe.dataset.type);
@@ -41,6 +43,7 @@ export const duplicateFilter = (instance) => {
 
   const container = document.getElementById("Diagram");
   container.appendChild(newFilter);
+  showWarning(newFilter.id);
 
   instance.draggable(newFilter.id, { containment: true });
   createEndpoints(instance, newFilter.id, newFilter.dataset.type);
