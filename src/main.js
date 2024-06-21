@@ -36,11 +36,19 @@ function App() {
       if (!isConnectionAllowed(source, target)) {
         return false;
       }
-      if (source.getAttribute("class").includes("Filter")) {
-        appState.addConnection(source.id, target.id);
-      } else {
-        appState.addConnection(target.id, source.id);
-      }
+
+      const pipe = source.getAttribute("class").includes("Filter")
+        ? target
+        : source;
+      const filter = source.getAttribute("class").includes("Filter")
+        ? source
+        : target;
+
+      appState.addConnection(filter.id, {
+        pipeId: pipe.id,
+        pipeType: pipe.textContent.replace(/\s+/g, "").split(`"`)[0],
+      });
+
       return true;
     });
 

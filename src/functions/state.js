@@ -19,7 +19,7 @@ export const appState = (() => {
     },
     removeConnectionValue: (value) => {
       for (let [key, values] of state.connections) {
-        const newValues = values.filter((val) => val !== value);
+        const newValues = values.filter((val) => val.pipeId !== value);
         if (newValues.length === 0) {
           state.connections.delete(key);
         } else {

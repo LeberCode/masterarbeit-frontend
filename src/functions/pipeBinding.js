@@ -8,15 +8,17 @@ export const getPipesForFilter = () => {
   let defaultCount = 1;
   connections &&
     connections.forEach((connection) => {
-      const pipeName = appState.getPipe(connection);
+      const pipeName = appState.getPipe(connection.pipeId);
       if (!pipeName) {
         const pipeName = `Default${defaultCount}`;
         appState.addPipe(connection, pipeName);
         const pipe = { pipeName, connection };
         pipeMapping.push(pipe);
-        const spanToChange = document.querySelector(`#${connection} #PipeName`);
+        const spanToChange = document.querySelector(
+          `#${connection.pipeId} #PipeName`
+        );
         spanToChange.innerHTML = `"${pipeName}"`;
-        showCheck(connection);
+        showCheck(connection.pipeId);
         defaultCount++;
       } else {
         const pipe = { pipeName, connection };
@@ -32,17 +34,19 @@ export const handlePipeBinding = (pipeMapping, editor) => {
   pipeMapping.forEach((pipe) => {
     if (
       editorCodeText.includes(
-        `const ${pipe.pipeName.replace(/\s+/g, "")}Pipe = "${pipe.pipeName}"`
+        `const ${makeValidConstName(pipe.pipeName)} = "${pipe.pipeName}"`
       )
     ) {
       return;
     } else {
+      let queue = pipe.connection.pipeType === "Queue" ? true : false;
       let line = editor.state.doc.line(lineNumber);
       let position = line.from;
       let pipeNameUserGiven = pipe.pipeName;
       let pipeNameDeklaration = makeValidConstName(pipeNameUserGiven);
-      pipeNameUserGiven.replace(/\s+/g, "");
-      let insertCode = `\t\tconst ${pipeNameDeklaration} = "${pipeNameUserGiven}"\n\t\tawait channel.assertQueue(${pipeNameDeklaration}, {\n\t\t\tdurable: false\n\t\t});\n`;
+      let insertCode = `\t\tconst ${pipeNameDeklaration} = "${pipeNameUserGiven}";\n\t\tawait channel.${
+        queue ? "assertQueue" : "assertTopic"
+      }(${pipeNameDeklaration}, {\n\t\t\tdurable: false\n\t\t});\n`;
       let transaction = editor.state.update({
         changes: {
           from: position,
@@ -50,7 +54,7 @@ export const handlePipeBinding = (pipeMapping, editor) => {
         },
       });
       editor.dispatch(transaction);
-      lineNumber++;
+      lineNumber = lineNumber + 4;
     }
   });
 };
