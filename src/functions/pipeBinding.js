@@ -24,7 +24,7 @@ export const handlePipeBinding = (pipeMapping, editor) => {
   pipeMapping.forEach((pipe) => {
     if (
       editorCodeText.includes(
-        `const ${pipe.pipeName.replace(/\s+/g, "")} = "${pipe.pipeName}"`
+        `const ${pipe.pipeName.replace(/\s+/g, "")}Pipea = "${pipe.pipeName}"`
       )
     ) {
       return;
@@ -34,7 +34,7 @@ export const handlePipeBinding = (pipeMapping, editor) => {
       let transaction = editor.state.update({
         changes: {
           from: position,
-          insert: `\t\tconst ${pipe.pipeName.replace(/\s+/g, "")} = "${
+          insert: `\t\tconst ${pipe.pipeName.replace(/\s+/g, "")}Pipe = "${
             pipe.pipeName
           }"\n`,
         },
