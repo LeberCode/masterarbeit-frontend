@@ -76,6 +76,5 @@ export const extendPipe = () => {
       `#${window.selectedPipe} #PipeName`
     );
     spanToChange.innerHTML = `"${newPipeName}"`;
-    console.log(appState.getState().pipes);
   }
 };
