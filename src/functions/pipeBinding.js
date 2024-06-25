@@ -131,6 +131,8 @@ const buildPipesElements = (pipeMapping) => {
 
   const incomingPipesElement = document.getElementById("incomingPipes");
   const outgoingPipesElement = document.getElementById("outgoingPipes");
+  incomingPipesElement.innerHTML = "";
+  outgoingPipesElement.innerHTML = "";
 
   incomingPipes.forEach((pipe) => {
     const pipeElement = document.createElement("span");

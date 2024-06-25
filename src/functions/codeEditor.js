@@ -39,8 +39,7 @@ export const codeEditorElement = (instance) => {
     pipesElement.style.display = "flex";
     pipesElement.style.justifyContent = "space-between";
 
-    const incomingElement = document.createElement("div");
-    incomingElement.id = "incomingPipes";
+    const incomingContainer = document.createElement("div");
     const incomingHeadingElement = document.createElement("h5");
     incomingHeadingElement.style.margin = "0px";
     incomingHeadingElement.style.marginBottom = "6px";
@@ -48,22 +47,28 @@ export const codeEditorElement = (instance) => {
     incomingHeadingElement.appendChild(
       document.createTextNode("Incoming Pipes")
     );
-    incomingElement.appendChild(incomingHeadingElement);
-    incomingElement.appendChild(document.createElement("hr"));
-    pipesElement.appendChild(incomingElement);
+    incomingContainer.appendChild(incomingHeadingElement);
+    incomingContainer.appendChild(document.createElement("hr"));
 
-    const outgoingElement = document.createElement("div");
-    outgoingElement.id = "outgoingPipes";
-    outgoingElement.style.textAlign = "right";
+    const incomingPipes = document.createElement("div");
+    incomingPipes.id = "incomingPipes";
+    incomingContainer.appendChild(incomingPipes);
+    pipesElement.appendChild(incomingContainer);
+
+    const outgoingContainer = document.createElement("div");
+    outgoingContainer.style.textAlign = "right";
     const outgoingHeadingElement = document.createElement("h5");
     outgoingHeadingElement.style.margin = "0px";
     outgoingHeadingElement.style.marginBottom = "6px";
     outgoingHeadingElement.appendChild(
-      document.createTextNode("OutgoingPipes")
+      document.createTextNode("Outgoing Pipes")
     );
-    outgoingElement.appendChild(outgoingHeadingElement);
-    outgoingElement.appendChild(document.createElement("hr"));
-    pipesElement.appendChild(outgoingElement);
+    outgoingContainer.appendChild(outgoingHeadingElement);
+    outgoingContainer.appendChild(document.createElement("hr"));
+    const outgoingPipes = document.createElement("div");
+    outgoingPipes.id = "outgoingPipes";
+    outgoingContainer.appendChild(outgoingPipes);
+    pipesElement.appendChild(outgoingContainer);
 
     editorContainer.appendChild(pipesElement);
 
