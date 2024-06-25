@@ -133,7 +133,6 @@ const buildPipesElements = (pipeMapping) => {
   const outgoingPipesElement = document.getElementById("outgoingPipes");
 
   incomingPipes.forEach((pipe) => {
-    console.log(pipe);
     const pipeElement = document.createElement("span");
     pipeElement.appendChild(document.createTextNode(pipe.pipeName));
     pipeElement.style.marginRight = "6px";
