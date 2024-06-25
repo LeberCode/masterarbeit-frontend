@@ -6,7 +6,7 @@ import { showCheck } from "./visualValidation";
 import { handlePipeBinding, getPipesForFilter } from "./pipeBinding";
 
 let editorValues = {
-  doc: "const amqp = require('amqplib/callback_api');\n\nconst rabbitmqUrl = 'amqp://mquser:mqpass@rabbit:5672';\n\namqp.connect(rabbitmqUrl, (error0, connection) => {\n    if (error0) {\n        throw error0;\n    }\n    connection.createChannel((error1, channel) => {\n        if (error1) {\n            throw error1;\n        }\n\n\n\n        //TODO: Code logic here\n});\n",
+  doc: "const amqp = require('amqplib/callback_api');\n\nconst rabbitmqUrl = 'amqp://mquser:mqpass@rabbit:5672';\n\namqp.connect(rabbitmqUrl, (error0, connection) => {\n    if (error0) {\n        throw error0;\n    }\n    connection.createChannel((error1, channel) => {\n        if (error1) {\n            throw error1;\n        }\n\n\n\n        //TODO: Code logic here\n\t});\n});\n",
   extensions: [basicSetup, javascript()],
 };
 
@@ -34,6 +34,38 @@ export const codeEditorElement = (instance) => {
     containerHeading.style.marginTop = "6px";
     containerHeading.style.marginBottom = "0px";
     editorContainer.appendChild(containerHeading);
+
+    const pipesElement = document.createElement("div");
+    pipesElement.style.display = "flex";
+    pipesElement.style.justifyContent = "space-between";
+
+    const incomingElement = document.createElement("div");
+    incomingElement.id = "incomingPipes";
+    const incomingHeadingElement = document.createElement("h5");
+    incomingHeadingElement.style.margin = "0px";
+    incomingHeadingElement.style.marginBottom = "6px";
+
+    incomingHeadingElement.appendChild(
+      document.createTextNode("Incoming Pipes")
+    );
+    incomingElement.appendChild(incomingHeadingElement);
+    incomingElement.appendChild(document.createElement("hr"));
+    pipesElement.appendChild(incomingElement);
+
+    const outgoingElement = document.createElement("div");
+    outgoingElement.id = "outgoingPipes";
+    outgoingElement.style.textAlign = "right";
+    const outgoingHeadingElement = document.createElement("h5");
+    outgoingHeadingElement.style.margin = "0px";
+    outgoingHeadingElement.style.marginBottom = "6px";
+    outgoingHeadingElement.appendChild(
+      document.createTextNode("OutgoingPipes")
+    );
+    outgoingElement.appendChild(outgoingHeadingElement);
+    outgoingElement.appendChild(document.createElement("hr"));
+    pipesElement.appendChild(outgoingElement);
+
+    editorContainer.appendChild(pipesElement);
 
     diagram.appendChild(editorContainer);
 

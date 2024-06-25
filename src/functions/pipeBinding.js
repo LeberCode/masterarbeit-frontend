@@ -11,6 +11,7 @@ export const getPipesForFilter = (instance) => {
       pipeId: connection.sourceId,
       pipeType:
         connection.source.dataset.type === "Default" ? "Queue" : "Topic",
+      pipeDirection: "in",
     }));
   const outgoingConnections = allConnections
     .filter((connection) => connection.sourceId === filter)
@@ -18,11 +19,10 @@ export const getPipesForFilter = (instance) => {
       pipeId: connection.targetId,
       pipeType:
         connection.target.dataset.type === "Default" ? "Queue" : "Topic",
+      pipeDirection: "out",
     }));
 
   const connectionsForFilter = incomingConnections.concat(outgoingConnections);
-
-  // buildPipesElements();
 
   const pipeMapping = [];
   let defaultCount = 1;
@@ -32,7 +32,7 @@ export const getPipesForFilter = (instance) => {
       if (!pipeName) {
         const pipeName = `Default${defaultCount}`;
         appState.addPipe(connection, pipeName);
-        const pipe = { pipeName, connection };
+        const pipe = { pipeName, ...connection };
         pipeMapping.push(pipe);
         const spanToChange = document.querySelector(
           `#${connection.pipeId} #PipeName`
@@ -41,10 +41,11 @@ export const getPipesForFilter = (instance) => {
         showCheck(connection.pipeId);
         defaultCount++;
       } else {
-        const pipe = { pipeName, connection };
+        const pipe = { pipeName, ...connection };
         pipeMapping.push(pipe);
       }
     });
+  buildPipesElements(pipeMapping);
   return pipeMapping;
 };
 
@@ -59,7 +60,7 @@ export const handlePipeBinding = (pipeMapping, editor) => {
     ) {
       return;
     } else {
-      let queue = pipe.connection.pipeType === "Queue" ? true : false;
+      let queue = pipe.pipeType === "Queue" ? true : false;
       let line = editor.state.doc.line(lineNumber);
       let position = line.from;
       let pipeNameUserGiven = pipe.pipeName;
@@ -120,7 +121,28 @@ const makeValidConstName = (str) => {
   return validStr;
 };
 
-const buildPipesElements = (incoming, outgoing) => {
-  console.log("### in: ", incoming);
-  console.log("### out: ", outgoing);
+const buildPipesElements = (pipeMapping) => {
+  const incomingPipes = pipeMapping.filter(
+    (pipe) => pipe.pipeDirection === "in"
+  );
+  const outgoingPipes = pipeMapping.filter(
+    (pipe) => pipe.pipeDirection === "out"
+  );
+
+  const incomingPipesElement = document.getElementById("incomingPipes");
+  const outgoingPipesElement = document.getElementById("outgoingPipes");
+
+  incomingPipes.forEach((pipe) => {
+    console.log(pipe);
+    const pipeElement = document.createElement("span");
+    pipeElement.appendChild(document.createTextNode(pipe.pipeName));
+    pipeElement.style.marginRight = "6px";
+    incomingPipesElement.appendChild(pipeElement);
+  });
+  outgoingPipes.forEach((pipe) => {
+    const pipeElement = document.createElement("span");
+    pipeElement.appendChild(document.createTextNode(pipe.pipeName));
+    pipeElement.style.marginLeft = "6px";
+    outgoingPipesElement.appendChild(pipeElement);
+  });
 };
