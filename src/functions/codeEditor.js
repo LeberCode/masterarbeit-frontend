@@ -21,7 +21,7 @@ export const codeEditorElement = (instance) => {
       `codeEditor${window.selectedFilter}`
     );
     codeEditor.style.visibility = "visible";
-    handlePipeBinding(getPipesForFilter(), editor);
+    handlePipeBinding(getPipesForFilter(instance), editor);
   } else {
     var diagram = document.getElementById("Diagram");
 
@@ -56,7 +56,7 @@ export const codeEditorElement = (instance) => {
     closingX.addEventListener("click", () => handleCancel(editorContainer));
     editorContainer.appendChild(closingX);
 
-    handlePipeBinding(getPipesForFilter(), editor);
+    handlePipeBinding(getPipesForFilter(instance), editor);
     editorContainer.appendChild(editor.dom);
 
     var buttonContainer = document.createElement("div");

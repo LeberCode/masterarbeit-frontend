@@ -1,13 +1,33 @@
 import { appState } from "./state";
 import { showCheck } from "./visualValidation";
 
-export const getPipesForFilter = () => {
+export const getPipesForFilter = (instance) => {
   const filter = window.selectedFilter;
-  const connections = appState.getConnection(filter);
+  const allConnections = instance.getAllConnections();
+
+  const incomingConnections = allConnections
+    .filter((connection) => connection.targetId === filter)
+    .map((connection) => ({
+      pipeId: connection.sourceId,
+      pipeType:
+        connection.source.dataset.type === "Default" ? "Queue" : "Topic",
+    }));
+  const outgoingConnections = allConnections
+    .filter((connection) => connection.sourceId === filter)
+    .map((connection) => ({
+      pipeId: connection.targetId,
+      pipeType:
+        connection.target.dataset.type === "Default" ? "Queue" : "Topic",
+    }));
+
+  const connectionsForFilter = incomingConnections.concat(outgoingConnections);
+
+  // buildPipesElements();
+
   const pipeMapping = [];
   let defaultCount = 1;
-  connections &&
-    connections.forEach((connection) => {
+  connectionsForFilter &&
+    connectionsForFilter.forEach((connection) => {
       const pipeName = appState.getPipe(connection.pipeId);
       if (!pipeName) {
         const pipeName = `Default${defaultCount}`;
@@ -98,4 +118,9 @@ const makeValidConstName = (str) => {
   }
 
   return validStr;
+};
+
+const buildPipesElements = (incoming, outgoing) => {
+  console.log("### in: ", incoming);
+  console.log("### out: ", outgoing);
 };
