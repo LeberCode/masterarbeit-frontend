@@ -24,7 +24,7 @@
   text-align: center;
   align-content: center;
   position: absolute;
-  border: 2px solid blue;
+  border: 2px solid black;
   border-radius: 4px;
   width: 84px;
   height: 66px;
@@ -269,10 +269,9 @@
 
 #Diagram #Warning {
   position: absolute;
-  left: -12px;
-  top: 0;
-  color: orange;
-  background-color: ghostwhite;
+  left: -18px;
+  top: -6px;
+  color: red;
 }
 
 #Toolbox #Warning {
@@ -282,10 +281,9 @@
 
 #Diagram #Check {
   position: absolute;
-  left: -12px;
-  top: 0;
+  left: -18px;
+  top: -6px;
   color: green;
-  background-color: ghostwhite;
   visibility: hidden;
 }
 
@@ -294,16 +292,29 @@
   visibility: hidden;
 }
 
-#Diagram #Docker {
+#Diagram #DeployIcon {
   position: absolute;
-  left: -12px;
-  top: 0;
+  left: -18px;
+  top: -6px;
   color: blue;
   background-color: ghostwhite;
   visibility: hidden;
 }
 
-#Toolbox #Docker {
+#Toolbox #DeployIcon {
+  position: absolute;
+  visibility: hidden;
+}
+
+#Diagram #PauseIcon {
+  position: absolute;
+  left: -18px;
+  top: -6px;
+  color: orange;
+  visibility: hidden;
+}
+
+#Toolbox #PauseIcon {
   position: absolute;
   visibility: hidden;
 }

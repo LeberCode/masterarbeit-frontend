@@ -136,6 +136,6 @@ const handleSubmit = (node, code) => {
   };
   createCustomCode(requestBody);
   node.style.visibility = "hidden";
-  showCheck(window.selectedFilter);
   document.getElementById("Deploy").removeAttribute("disabled");
+  showCheck(window.selectedFilter);
 };

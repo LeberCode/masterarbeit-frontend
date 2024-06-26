@@ -14,7 +14,7 @@ import {
   clearModel,
 } from "./functions/api";
 import { getScaleValues } from "./functions/scaling";
-import { showAllWarning } from "./functions/visualValidation";
+import { showAllWarning, showPause } from "./functions/visualValidation";
 import { coorectId } from "./functions/id";
 
 function App() {
@@ -104,7 +104,9 @@ function App() {
 
   pauseElement.addEventListener("click", () => {
     stopCustomCode();
+    showPause();
     pauseElement.setAttribute("disabled", "disabled");
+    deployElement.innerHTML = "Restart";
     deployElement.removeAttribute("disabled");
   });
   pauseElement.setAttribute("disabled", "disabled");
@@ -126,6 +128,7 @@ function App() {
     killDeploymentElement.disabled = true;
     await getScaleValues();
     showAllWarning();
+    deployElement.innerHTML = "Deploy";
   });
 }
 
