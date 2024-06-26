@@ -97,6 +97,6 @@ export const initContextmenu = (instance) => {
     duplicatePipe(instance);
   });
   $("body").on("click", ".name-pipe", (event) => {
-    extendPipe();
+    extendPipe(instance);
   });
 };

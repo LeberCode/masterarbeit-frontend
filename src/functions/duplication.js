@@ -50,7 +50,7 @@ export const duplicateFilter = (instance) => {
   createEndpoints(instance, newFilter.id, newFilter.dataset.type);
 };
 
-export const extendPipe = () => {
+export const extendPipe = (instance) => {
   let newPipeName;
 
   while (true) {
@@ -77,5 +77,6 @@ export const extendPipe = () => {
     );
     spanToChange.innerHTML = `"${newPipeName}"`;
     showCheck(window.selectedPipe);
+    instance.repaintEverything();
   }
 };
