@@ -37,6 +37,7 @@ export const getPipesForFilter = (instance) => {
         );
         spanToChange.innerHTML = `"${pipeName}"`;
         showCheck(connection.pipeId);
+        instance.repaintEverything();
         defaultCount++;
       } else {
         const pipe = { pipeName, ...connection };
