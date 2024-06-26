@@ -122,6 +122,7 @@ const makeValidConstName = (str) => {
 };
 
 const buildPipesElements = (pipeMapping) => {
+  console.log("### pipes: ", pipeMapping);
   const incomingPipes = pipeMapping.filter(
     (pipe) => pipe.pipeDirection === "in"
   );
@@ -129,8 +130,12 @@ const buildPipesElements = (pipeMapping) => {
     (pipe) => pipe.pipeDirection === "out"
   );
 
-  const incomingPipesElement = document.getElementById("incomingPipes");
-  const outgoingPipesElement = document.getElementById("outgoingPipes");
+  const incomingPipesElement = document.querySelector(
+    `#codeEditor${window.selectedFilter} #incomingPipes`
+  );
+  const outgoingPipesElement = document.querySelector(
+    `#codeEditor${window.selectedFilter} #outgoingPipes`
+  );
   incomingPipesElement.innerHTML = "";
   outgoingPipesElement.innerHTML = "";
 
