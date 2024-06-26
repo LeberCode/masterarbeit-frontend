@@ -1,4 +1,5 @@
 import { scaleValues } from "./api";
+import { showDeployIcon } from "./visualValidation";
 
 export const getScaleValues = async () => {
   const values = await scaleValues();
@@ -7,6 +8,7 @@ export const getScaleValues = async () => {
       const filter = document.getElementById(value.id);
       const scale = filter.querySelector(".Scale");
       scale.textContent = value.count;
+      value.count > 0 ? showDeployIcon(value.id) : null;
     });
   } else {
     // kill Deployment was triggerd

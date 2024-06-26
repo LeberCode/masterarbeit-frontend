@@ -2,7 +2,6 @@ import axios from "axios";
 import { SERVER_URL } from "../config";
 import { loader, errorFeedback, successFeedback } from "./feedback";
 import { getScaleValues } from "./scaling";
-import { showDeployIcon } from "./visualValidation";
 
 export const runCustomCode = () => {
   loader(true);
@@ -12,7 +11,6 @@ export const runCustomCode = () => {
       loader(false);
       if (response.status === 200) {
         successFeedback();
-        showDeployIcon();
       } else {
         errorFeedback(response);
       }
@@ -50,7 +48,6 @@ export const restartCustomCode = () => {
       loader(false);
       if (response.status === 200) {
         successFeedback();
-        showDeployIcon();
       } else {
         errorFeedback(response);
       }
