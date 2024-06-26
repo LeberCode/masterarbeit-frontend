@@ -122,7 +122,6 @@ const makeValidConstName = (str) => {
 };
 
 const buildPipesElements = (pipeMapping) => {
-  console.log("### pipes: ", pipeMapping);
   const incomingPipes = pipeMapping.filter(
     (pipe) => pipe.pipeDirection === "in"
   );
