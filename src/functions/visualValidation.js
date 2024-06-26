@@ -24,11 +24,11 @@ export const showCheck = (id) => {
 };
 export const showDeployIcon = () => {
   let elementsToHide = document.querySelectorAll(
-    "#Diagram #Warning, #Diagram #Check, #Diagram #PauseIcon"
+    "#Diagram .Filter #Warning, #Diagram .Filter #Check, #Diagram .Filter #PauseIcon"
   );
   elementsToHide.forEach((element) => (element.style.visibility = "hidden"));
 
-  let iconsToShow = document.querySelectorAll("#Diagram #DeployIcon");
+  let iconsToShow = document.querySelectorAll("#Diagram .Filter #DeployIcon");
   iconsToShow.forEach((element) => (element.style.visibility = "visible"));
 
   let filterToChange = document.querySelectorAll("#Diagram .Filter");
@@ -37,11 +37,11 @@ export const showDeployIcon = () => {
 
 export const showPause = () => {
   let elementsToHide = document.querySelectorAll(
-    "#Diagram #Warning, #Diagram #Check, #Diagram #DeployIcon"
+    "#Diagram .Filter #Warning, #Diagram .Filter #Check, #Diagram .Filter #DeployIcon"
   );
   elementsToHide.forEach((element) => (element.style.visibility = "hidden"));
 
-  let iconsToShow = document.querySelectorAll("#Diagram #PauseIcon");
+  let iconsToShow = document.querySelectorAll("#Diagram .Filter #PauseIcon");
   iconsToShow.forEach((element) => (element.style.visibility = "visible"));
 
   let filterToChange = document.querySelectorAll("#Diagram .Filter");
@@ -50,11 +50,11 @@ export const showPause = () => {
 
 export const showAllWarning = () => {
   let elementsToHide = document.querySelectorAll(
-    "#Diagram #DeployIcon, #Diagram #PauseIcon, #Diagram #Check"
+    "#Diagram .Filter #DeployIcon, #Diagram .Filter #PauseIcon, #Diagram .Filter #Check"
   );
   elementsToHide.forEach((element) => (element.style.visibility = "hidden"));
 
-  let iconsToShow = document.querySelectorAll("#Diagram #Warning");
+  let iconsToShow = document.querySelectorAll("#Diagram .Filter #Warning");
   iconsToShow.forEach((element) => (element.style.visibility = "visible"));
 
   let filterToChange = document.querySelectorAll("#Diagram .Filter");
