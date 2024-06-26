@@ -10,18 +10,13 @@ let editorValues = {
   extensions: [basicSetup, javascript()],
 };
 
-let editorStartState = EditorState.create(editorValues);
-const editor = new EditorView({
-  state: editorStartState,
-});
-
 export const codeEditorElement = (instance) => {
   if (document.getElementById(`codeEditor${window.selectedFilter}`)) {
     const codeEditor = document.getElementById(
       `codeEditor${window.selectedFilter}`
     );
     codeEditor.style.visibility = "visible";
-    handlePipeBinding(getPipesForFilter(instance), editor);
+    handlePipeBinding(getPipesForFilter(instance), codeEditor.editor);
   } else {
     var diagram = document.getElementById("Diagram");
 
@@ -93,8 +88,15 @@ export const codeEditorElement = (instance) => {
     closingX.addEventListener("click", () => handleCancel(editorContainer));
     editorContainer.appendChild(closingX);
 
-    handlePipeBinding(getPipesForFilter(instance), editor);
-    editorContainer.appendChild(editor.dom);
+    let editorStartState = EditorState.create(editorValues);
+    const editor = new EditorView({
+      state: editorStartState,
+      parent: editorContainer,
+    });
+    editorContainer.editor = editor;
+
+    // editorContainer.appendChild(editor.dom);
+    handlePipeBinding(getPipesForFilter(instance), editorContainer.editor);
 
     var buttonContainer = document.createElement("div");
     buttonContainer.classList.add("codeEditorButtons");
