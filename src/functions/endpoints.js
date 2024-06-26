@@ -15,14 +15,14 @@ const severalEndpointsLeft = {
   anchor: ["LeftMiddle"],
   isTarget: true,
   connectionType: "flow",
-  maxConnections: 3,
+  maxConnections: 5,
 };
 const severalEndpointsRight = {
   endpoint: ["Dot", { radius: 5 }],
   anchor: ["RightMiddle"],
   isSource: true,
   connectionType: "flow",
-  maxConnections: 3,
+  maxConnections: 5,
 };
 
 export const createEndpoints = (instance, id, type) => {

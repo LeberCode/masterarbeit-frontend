@@ -9,16 +9,14 @@ export const getPipesForFilter = (instance) => {
     .filter((connection) => connection.targetId === filter)
     .map((connection) => ({
       pipeId: connection.sourceId,
-      pipeType:
-        connection.source.dataset.type === "Default" ? "Queue" : "Topic",
+      pipeType: connection.source.dataset.pipetype,
       pipeDirection: "in",
     }));
   const outgoingConnections = allConnections
     .filter((connection) => connection.sourceId === filter)
     .map((connection) => ({
       pipeId: connection.targetId,
-      pipeType:
-        connection.target.dataset.type === "Default" ? "Queue" : "Topic",
+      pipeType: connection.target.dataset.pipetype,
       pipeDirection: "out",
     }));
 
@@ -60,14 +58,11 @@ export const handlePipeBinding = (pipeMapping, editor) => {
     ) {
       return;
     } else {
-      let queue = pipe.pipeType === "Queue" ? true : false;
       let line = editor.state.doc.line(lineNumber);
       let position = line.from;
       let pipeNameUserGiven = pipe.pipeName;
       let pipeNameDeklaration = makeValidConstName(pipeNameUserGiven);
-      let insertCode = `\t\tconst ${pipeNameDeklaration} = "${pipeNameUserGiven}";\n\t\tawait channel.${
-        queue ? "assertQueue" : "assertTopic"
-      }(${pipeNameDeklaration}, {\n\t\t\tdurable: false\n\t\t});\n`;
+      let insertCode = `\t\tconst ${pipeNameDeklaration} = "${pipeNameUserGiven}";\n\t\tawait channel.assert${pipe.pipeType}(${pipeNameDeklaration}, {\n\t\t\tdurable: false\n\t\t});\n`;
       let transaction = editor.state.update({
         changes: {
           from: position,
