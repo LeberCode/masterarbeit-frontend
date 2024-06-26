@@ -63,7 +63,11 @@ export const handlePipeBinding = (pipeMapping, editor) => {
       let position = line.from;
       let pipeNameUserGiven = pipe.pipeName;
       let pipeNameDeklaration = makeValidConstName(pipeNameUserGiven);
-      let insertCode = `\t\tconst ${pipeNameDeklaration} = "${pipeNameUserGiven}";\n\t\tawait channel.assert${pipe.pipeType}(${pipeNameDeklaration}, {\n\t\t\tdurable: false\n\t\t});\n`;
+      let insertCode = `\t\tconst ${pipeNameDeklaration} = "${pipeNameUserGiven}";\n\t\tchannel.assert${
+        pipe.pipeType === "Queue" ? "Queue" : "Exchange"
+      }(${pipeNameDeklaration}, ${
+        pipe.pipeType === "Topic" ? `"topic", ` : ""
+      }{\n\t\t\tdurable: false\n\t\t});\n`;
       let transaction = editor.state.update({
         changes: {
           from: position,
