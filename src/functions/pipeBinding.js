@@ -35,7 +35,7 @@ export const getPipesForFilter = (instance) => {
         const spanToChange = document.querySelector(
           `#${connection.pipeId} #PipeName`
         );
-        spanToChange.innerHTML = `"${pipeName}"`;
+        spanToChange.innerHTML = `${pipeName}`;
         showCheck(connection.pipeId);
         instance.repaintEverything();
         defaultCount++;
@@ -50,47 +50,55 @@ export const getPipesForFilter = (instance) => {
 
 export const handlePipeBinding = (pipeMapping, editor) => {
   // clear pipe-binindg code
-  const codeArray = editor.state.doc.toString();
-  const start = "        // START pipe-binding";
+  let codeArray = editor.state.doc.toString();
+  const start = "        // incoming Pipes";
+  const middle = "        // outgoing Pipes";
   const end = "        // END pipe-binding";
 
   const startIndex = codeArray.indexOf(start);
-  const endIndex = codeArray.indexOf(end, startIndex + start.length);
+  const midIndexIn = codeArray.indexOf(middle);
 
-  if (startIndex && endIndex) {
-    const transaction = editor.state.update({
+  if (startIndex && midIndexIn) {
+    const transactionForIn = editor.state.update({
       changes: [
         {
           from: startIndex + start.length,
+          to: midIndexIn,
+          insert: "\n\n",
+        },
+      ],
+    });
+    editor.dispatch(transactionForIn);
+  }
+  codeArray = editor.state.doc.toString();
+  const midIndexOut = codeArray.indexOf(middle);
+  const endIndex = codeArray.indexOf(end);
+
+  if (midIndexOut && endIndex) {
+    const transactionForOut = editor.state.update({
+      changes: [
+        {
+          from: midIndexOut + middle.length,
           to: endIndex,
           insert: "\n",
         },
       ],
     });
-    editor.dispatch(transaction);
+    editor.dispatch(transactionForOut);
   }
 
   // insert pipe-binding-code
-  let lineNumber = 15;
-  pipeMapping.forEach((pipe) => {
-    let line = editor.state.doc.line(lineNumber);
-    let position = line.from;
-    let pipeNameUserGiven = pipe.pipeName;
-    let pipeNameDeklaration = makeValidConstName(pipeNameUserGiven);
-    let insertCode = `\t\tconst ${pipeNameDeklaration} = "${pipeNameUserGiven}";\n\t\tchannel.assert${
-      pipe.pipeType === "Queue" ? "Queue" : "Exchange"
-    }(${pipeNameDeklaration}, ${
-      pipe.pipeType === "Topic" ? `"topic", ` : ""
-    }{\n\t\t\tdurable: false\n\t\t});\n`;
-    let transaction = editor.state.update({
-      changes: {
-        from: position,
-        insert: insertCode,
-      },
-    });
-    editor.dispatch(transaction);
-    lineNumber = lineNumber + 4;
-  });
+  const incomingPipes = pipeMapping.filter(
+    (pipe) => pipe.pipeDirection === "in"
+  );
+  const outgoingPipes = pipeMapping.filter(
+    (pipe) => pipe.pipeDirection === "out"
+  );
+  let lineNumberIn = 16;
+  let lineNumberOut = 18 + incomingPipes.length * 4;
+
+  fillEditorwithCode(editor, incomingPipes, lineNumberIn);
+  fillEditorwithCode(editor, outgoingPipes, lineNumberOut);
 };
 
 const makeValidConstName = (str) => {
@@ -162,5 +170,27 @@ const buildPipesElements = (pipeMapping) => {
     pipeElement.appendChild(document.createTextNode(pipe.pipeName));
     pipeElement.style.marginLeft = "6px";
     outgoingPipesElement.appendChild(pipeElement);
+  });
+};
+
+const fillEditorwithCode = (editor, pipeMapping, lineNumber) => {
+  pipeMapping.forEach((pipe) => {
+    let line = editor.state.doc.line(lineNumber);
+    let position = line.from;
+    let pipeNameUserGiven = pipe.pipeName;
+    let pipeNameDeklaration = makeValidConstName(pipeNameUserGiven);
+    let insertCode = `\t\tconst ${pipeNameDeklaration} = "${pipeNameUserGiven}";\n\t\tchannel.assert${
+      pipe.pipeType === "Queue" ? "Queue" : "Exchange"
+    }(${pipeNameDeklaration}, ${
+      pipe.pipeType === "Topic" ? `"topic", ` : ""
+    }{\n\t\t\tdurable: false\n\t\t});\n`;
+    let transaction = editor.state.update({
+      changes: {
+        from: position,
+        insert: insertCode,
+      },
+    });
+    editor.dispatch(transaction);
+    lineNumber = lineNumber + 4;
   });
 };
