@@ -49,34 +49,47 @@ export const getPipesForFilter = (instance) => {
 };
 
 export const handlePipeBinding = (pipeMapping, editor) => {
-  let lineNumber = 14;
-  let editorCodeText = editor.state.doc.toString();
-  pipeMapping.forEach((pipe) => {
-    if (
-      editorCodeText.includes(
-        `const ${makeValidConstName(pipe.pipeName)} = "${pipe.pipeName}"`
-      )
-    ) {
-      return;
-    } else {
-      let line = editor.state.doc.line(lineNumber);
-      let position = line.from;
-      let pipeNameUserGiven = pipe.pipeName;
-      let pipeNameDeklaration = makeValidConstName(pipeNameUserGiven);
-      let insertCode = `\t\tconst ${pipeNameDeklaration} = "${pipeNameUserGiven}";\n\t\tchannel.assert${
-        pipe.pipeType === "Queue" ? "Queue" : "Exchange"
-      }(${pipeNameDeklaration}, ${
-        pipe.pipeType === "Topic" ? `"topic", ` : ""
-      }{\n\t\t\tdurable: false\n\t\t});\n`;
-      let transaction = editor.state.update({
-        changes: {
-          from: position,
-          insert: insertCode,
+  // clear pipe-binindg code
+  const codeArray = editor.state.doc.toString();
+  const start = "        // START pipe-binding";
+  const end = "        // END pipe-binding";
+
+  const startIndex = codeArray.indexOf(start);
+  const endIndex = codeArray.indexOf(end, startIndex + start.length);
+
+  if (startIndex && endIndex) {
+    const transaction = editor.state.update({
+      changes: [
+        {
+          from: startIndex + start.length,
+          to: endIndex,
+          insert: "\n",
         },
-      });
-      editor.dispatch(transaction);
-      lineNumber = lineNumber + 4;
-    }
+      ],
+    });
+    editor.dispatch(transaction);
+  }
+
+  // insert pipe-binding-code
+  let lineNumber = 15;
+  pipeMapping.forEach((pipe) => {
+    let line = editor.state.doc.line(lineNumber);
+    let position = line.from;
+    let pipeNameUserGiven = pipe.pipeName;
+    let pipeNameDeklaration = makeValidConstName(pipeNameUserGiven);
+    let insertCode = `\t\tconst ${pipeNameDeklaration} = "${pipeNameUserGiven}";\n\t\tchannel.assert${
+      pipe.pipeType === "Queue" ? "Queue" : "Exchange"
+    }(${pipeNameDeklaration}, ${
+      pipe.pipeType === "Topic" ? `"topic", ` : ""
+    }{\n\t\t\tdurable: false\n\t\t});\n`;
+    let transaction = editor.state.update({
+      changes: {
+        from: position,
+        insert: insertCode,
+      },
+    });
+    editor.dispatch(transaction);
+    lineNumber = lineNumber + 4;
   });
 };
 
