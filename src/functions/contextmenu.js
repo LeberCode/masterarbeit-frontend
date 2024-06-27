@@ -1,7 +1,7 @@
-import { duplicatePipe, duplicateFilter, extendPipe } from "./duplication";
+import { duplicatePipe, duplicateFilter } from "./duplication";
+import { nameFilter, namePipe } from "./naming";
 import { codeEditorElement } from "./codeEditor";
 import { scaleOut } from "./api";
-import { showCheck } from "./visualValidation";
 import { appState } from "./state";
 
 export const initContextmenu = (instance) => {
@@ -36,13 +36,16 @@ export const initContextmenu = (instance) => {
     $(
       `<div style='display: flex; flex-direction: column;' class='custom-menu'>
         <button style='border: none; padding: 6px 12px; cursor: pointer;' class='code-filter'>
-          Add Implementation
+        Add Implementation
+        </button>
+        <button style='border: none; padding: 6px 12px; cursor: pointer;' class='name-filter'>
+          Name Filter
         </button>
         <button style='border: none; padding: 6px 12px; cursor: pointer;' class='duplicate-filter'>
           Duplicate Filter
         </button>
         <button style='background-color: blue; color: white; border: none; padding: 6px 12px; cursor: pointer;' class='scale-out'>
-          SCALE OUT
+          Scale Out
         </button>
         <button style='background-color: red; color: white; border: none; padding: 6px 12px; cursor: pointer;' class='delete-filter'>
           Delete Filter
@@ -53,20 +56,23 @@ export const initContextmenu = (instance) => {
       .css({ top: event.pageY + "px", left: event.pageX + "px" });
   });
 
-  $("body").on("click", ".delete-filter", (event) => {
-    instance.remove(window.selectedFilter);
-    appState.removeConnection(window.selectedFilter);
+  $("body").on("click", ".code-filter", (event) => {
+    codeEditorElement(instance);
+  });
+  $("body").on("click", ".name-filter", (event) => {
+    nameFilter(instance);
   });
   $("body").on("click", ".duplicate-filter", (event) => {
     duplicateFilter(instance);
-  });
-  $("body").on("click", ".code-filter", (event) => {
-    codeEditorElement(instance);
   });
   $("body").on("click", ".scale-out", (event) => {
     scaleOut(window.selectedFilter);
     document.getElementById("Pause").removeAttribute("disabled");
     document.getElementById("Deploy").setAttribute("disabled", "disabled");
+  });
+  $("body").on("click", ".delete-filter", (event) => {
+    instance.remove(window.selectedFilter);
+    appState.removeConnection(window.selectedFilter);
   });
 
   // Kontext Menü für Pipes
@@ -99,6 +105,6 @@ export const initContextmenu = (instance) => {
     duplicatePipe(instance);
   });
   $("body").on("click", ".name-pipe", (event) => {
-    extendPipe(instance);
+    namePipe(instance);
   });
 };

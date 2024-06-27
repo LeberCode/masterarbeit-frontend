@@ -16,6 +16,16 @@ export const codeEditorElement = (instance) => {
       `codeEditor${window.selectedFilter}`
     );
     codeEditor.style.visibility = "visible";
+    const filterName = document.querySelector(
+      `#${window.selectedFilter} #FilterName`
+    ).innerText;
+    filterName
+      ? (codeEditor.childNodes[1].innerText = `${
+          document
+            .getElementById(window.selectedFilter)
+            .innerHTML.split("\n")[1]
+        }: ${filterName}`)
+      : null;
     handlePipeBinding(getPipesForFilter(instance), codeEditor.editor);
   } else {
     var diagram = document.getElementById("Diagram");
@@ -24,11 +34,32 @@ export const codeEditorElement = (instance) => {
     editorContainer.classList.add("editorContainer");
     editorContainer.id = `codeEditor${window.selectedFilter}`;
 
-    const containerHeading = document.createElement("h4");
+    const filterToCode = {
+      type: document
+        .getElementById(window.selectedFilter)
+        .innerHTML.split("\n")[1],
+      id: window.selectedFilter,
+      name: document.querySelector(`#${window.selectedFilter} #FilterName`)
+        .innerText,
+    };
+
+    const containerHeading = document.createElement("h3");
     containerHeading.appendChild(document.createTextNode("CODE EDITOR"));
     containerHeading.style.marginTop = "6px";
     containerHeading.style.marginBottom = "0px";
     editorContainer.appendChild(containerHeading);
+
+    const editorNameElement = document.createElement("h4");
+    editorNameElement.style.marginTop = "6px";
+    editorNameElement.style.marginBottom = "6px";
+    editorNameElement.appendChild(
+      document.createTextNode(
+        `${filterToCode.type}: ${
+          filterToCode.name ? filterToCode.name : filterToCode.id
+        }`
+      )
+    );
+    editorContainer.appendChild(editorNameElement);
 
     const pipesElement = document.createElement("div");
     pipesElement.style.display = "flex";
@@ -68,19 +99,6 @@ export const codeEditorElement = (instance) => {
     editorContainer.appendChild(pipesElement);
 
     diagram.appendChild(editorContainer);
-
-    const filterToCode = {
-      type: document
-        .getElementById(window.selectedFilter)
-        .innerHTML.split("\n")[1],
-      id: window.selectedFilter,
-    };
-
-    const filterToCodeElement = document.createElement("p");
-    filterToCodeElement.appendChild(
-      document.createTextNode(`${filterToCode.type}: ${filterToCode.id}`)
-    );
-    editorContainer.appendChild(filterToCodeElement);
 
     const closingX = document.createElement("div");
     closingX.classList.add("closingX");

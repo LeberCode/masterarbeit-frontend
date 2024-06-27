@@ -49,34 +49,3 @@ export const duplicateFilter = (instance) => {
   instance.draggable(newFilter.id, { containment: true });
   createEndpoints(instance, newFilter.id, newFilter.dataset.type);
 };
-
-export const extendPipe = (instance) => {
-  let newPipeName;
-
-  while (true) {
-    newPipeName = prompt("Bitte geben Sie einen Pipe Namen ein:");
-
-    let nameExists = Array.from(appState.getState().pipes.values()).includes(
-      newPipeName
-    );
-
-    if (nameExists) {
-      alert(
-        "Dieser Name ist bereits vergeben. Bitte geben Sie einen anderen Namen ein."
-      );
-    } else {
-      break;
-    }
-  }
-
-  if (window.selectedPipe && newPipeName) {
-    appState.addPipe(window.selectedPipe, newPipeName);
-
-    const spanToChange = document.querySelector(
-      `#${window.selectedPipe} #PipeName`
-    );
-    spanToChange.innerHTML = `"${newPipeName}"`;
-    showCheck(window.selectedPipe);
-    instance.repaintEverything();
-  }
-};
