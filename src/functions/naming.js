@@ -35,21 +35,21 @@ export const namePipe = (instance) => {
 export const nameFilter = (instance) => {
   let newFilterName;
 
-  newFilterName = prompt("Bitte geben Sie einen Filter Namen ein:");
-  //   while (true) {
+  while (true) {
+    newFilterName = prompt("Bitte geben Sie einen Filter Namen ein:");
+    const allFilterNames = document.querySelectorAll("#Diagram #FilterName");
+    let nodeArray = Array.from(allFilterNames);
+    let innerHTMLArray = nodeArray.map((node) => node.innerHTML);
+    const nameExists = innerHTMLArray.includes(newFilterName);
 
-  //     let nameExists = Array.from(appState.getState().pipes.values()).includes(
-  //       newFilterName
-  //     );
-
-  //     if (nameExists) {
-  //       alert(
-  //         "Dieser Name ist bereits vergeben. Bitte geben Sie einen anderen Namen ein."
-  //       );
-  //     } else {
-  //       break;
-  //     }
-  //   }
+    if (nameExists) {
+      alert(
+        "Dieser Name ist bereits vergeben. Bitte geben Sie einen anderen Namen ein."
+      );
+    } else {
+      break;
+    }
+  }
 
   if (window.selectedFilter && newFilterName) {
     const spanToChange = document.querySelector(
