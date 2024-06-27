@@ -65,6 +65,8 @@ export const initContextmenu = (instance) => {
   });
   $("body").on("click", ".scale-out", (event) => {
     scaleOut(window.selectedFilter);
+    document.getElementById("Pause").removeAttribute("disabled");
+    document.getElementById("Deploy").setAttribute("disabled", "disabled");
   });
 
   // Kontext Menü für Pipes
