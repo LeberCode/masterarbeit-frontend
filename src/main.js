@@ -132,4 +132,8 @@ function App() {
   });
 }
 
+window.addEventListener("beforeunload", async function (event) {
+  await clearArchitecture();
+});
+
 App();
