@@ -91,6 +91,7 @@
               ></i>
               <i id="Check" class="fa-sharp fa-xl fa-solid fa-check"></i>
               <i id="DeployIcon" class="fa-solid fa-xl fa-play"></i>
+              <i id="PauseIcon" class="fa-solid fa-xl fa-pause"></i>
             </div>
             <div class="Filter" data-type="Collector">
               Aggregator
@@ -100,6 +101,7 @@
                 class="fa-sharp fa-solid fa-xl fa-exclamation"
               ></i>
               <i id="Check" class="fa-sharp fa-xl fa-solid fa-check"></i>
+              <i id="DeployIcon" class="fa-solid fa-xl fa-play"></i>
               <i id="PauseIcon" class="fa-solid fa-xl fa-pause"></i>
             </div>
           </div>
@@ -113,6 +115,27 @@
           <button id="KillDeployment" disabled="true">Kill Deployment</button>
           <button id="Deploy">Deploy</button>
           <button id="Pause">Pause</button>
+        </div>
+      </div>
+      <div class="iconsLegend">
+        <div>
+          <i
+            style="color: red"
+            class="fa-sharp fa-solid fa-xl fa-exclamation"
+          ></i>
+          <span>User Action Required</span>
+        </div>
+        <div>
+          <i style="color: green" class="fa-sharp fa-xl fa-solid fa-check"></i>
+          <span>Ready To Deploy</span>
+        </div>
+        <div>
+          <i style="color: blue" class="fa-solid fa-xl fa-play"></i>
+          <span>Deployed And Running</span>
+        </div>
+        <div>
+          <i style="color: orange" class="fa-solid fa-xl fa-pause"></i>
+          <span>Deployed And Paused</span>
         </div>
       </div>
     </div>
