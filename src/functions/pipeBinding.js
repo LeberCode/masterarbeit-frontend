@@ -103,14 +103,24 @@ export const handlePipeBinding = (pipeMapping, editor) => {
 
 const makeValidConstName = (str) => {
   // Entferne nicht erlaubte Zeichen, nur Buchstaben, Zahlen, _ und $ sind erlaubt
-  let validStr = str.replace(/[^a-zA-Z0-9_$]/g, "");
+  let validStr = str.replace(/[^a-zA-Z0-9_$ ]/g, ""); // Behalte Leerzeichen für CamelCase
+
+  // Konvertiere zu CamelCase
+  validStr = validStr
+    .split(" ")
+    .map((word, index) =>
+      index === 0
+        ? word.toLowerCase()
+        : word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+    )
+    .join("");
 
   // Stelle sicher, dass der Name nicht mit einer Zahl beginnt
   if (/^[0-9]/.test(validStr)) {
     validStr = "_" + validStr;
   }
 
-  // Überprüfen und anpassen, falls der Name ein reserviertes Wort ist (einfaches Beispiel)
+  // Überprüfen und anpassen, falls der Name ein reserviertes Wort ist
   const reservedWords = new Set([
     "var",
     "let",
