@@ -1,8 +1,16 @@
 import { showCheck } from "./visualValidation";
 import { appState } from "./state";
+import { renamePipeNamesInCode } from "./pipeBinding";
 
 export const namePipe = (instance) => {
   let newPipeName;
+
+  const selectedPipe = window.selectedPipe;
+  const pipeWasNamedBefore = appState.getPipe(selectedPipe);
+  const allConnections = instance.getAllConnections();
+  const pipeHasConnection = allConnections.some(
+    (con) => con.sourceId === selectedPipe || con.targetId === selectedPipe
+  );
 
   while (true) {
     newPipeName = prompt("Bitte geben Sie einen Pipe Namen ein:");
@@ -15,6 +23,41 @@ export const namePipe = (instance) => {
       alert(
         "Dieser Name ist bereits vergeben. Bitte geben Sie einen anderen Namen ein."
       );
+    } else if (pipeHasConnection && pipeWasNamedBefore && newPipeName) {
+      if (
+        confirm(
+          "Durch ändern des Pipe Namens wird dein Code im Filter angepasst! Alle alten Pipe Namen werden durch den Neuen ersetzt."
+        )
+      ) {
+        const oldPipeName = appState.getPipe(selectedPipe);
+
+        const tagetIds = allConnections
+          .filter((con) => con.sourceId === selectedPipe)
+          .map((con) => con.targetId);
+        const sourceIds = allConnections
+          .filter((con) => con.targetId === selectedPipe)
+          .map((con) => con.sourceId);
+        const filterIDs = [...tagetIds, ...sourceIds];
+
+        const filterEditors = [];
+        filterIDs.forEach((id) => {
+          const codeEditorEl = document.getElementById(`codeEditor${id}`);
+          if (codeEditorEl) {
+            const editor = codeEditorEl.editor;
+            filterEditors.push(editor);
+          }
+        });
+
+        if (filterEditors.length !== 0) {
+          filterEditors.forEach((editor) =>
+            renamePipeNamesInCode(editor, oldPipeName, newPipeName)
+          );
+        }
+        break;
+      } else {
+        newPipeName = null;
+        break;
+      }
     } else {
       break;
     }

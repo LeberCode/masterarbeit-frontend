@@ -29,7 +29,7 @@ export const getPipesForFilter = (instance) => {
       const pipeName = appState.getPipe(connection.pipeId);
       if (!pipeName) {
         const pipeName = `Default${defaultCount}`;
-        appState.addPipe(connection, pipeName);
+        appState.addPipe(connection.pipeId, pipeName);
         const pipe = { pipeName, ...connection };
         pipeMapping.push(pipe);
         const spanToChange = document.querySelector(
@@ -51,9 +51,9 @@ export const getPipesForFilter = (instance) => {
 export const handlePipeBinding = (pipeMapping, editor) => {
   // clear pipe-binindg code
   let codeArray = editor.state.doc.toString();
-  const start = "        // incoming Pipes";
-  const middle = "        // outgoing Pipes";
-  const end = "        // END pipe-binding";
+  const start = "        // INCOMING PIPES";
+  const middle = "        // OUTGOING PIPES";
+  const end = "        // END PIPE-BINDING";
 
   const startIndex = codeArray.indexOf(start);
   const midIndexIn = codeArray.indexOf(middle);
@@ -139,6 +139,16 @@ const makeValidConstName = (str) => {
     "import",
     "export",
     "default",
+    "throw",
+    "callback",
+    "amqp",
+    "rabbitmqUrl",
+    "error0",
+    "error1",
+    "connection",
+    "channel",
+    "createConnection",
+    "createChannel",
   ]);
   if (reservedWords.has(validStr)) {
     validStr = "_" + validStr;
@@ -203,4 +213,25 @@ const fillEditorwithCode = (editor, pipeMapping, lineNumber) => {
     editor.dispatch(transaction);
     lineNumber = lineNumber + 4;
   });
+};
+
+export const renamePipeNamesInCode = (editor, oldName, newName) => {
+  const oldNameInCode = makeValidConstName(oldName);
+  const newNameInCode = makeValidConstName(newName);
+  const codeString = editor.state.doc.toString();
+  const from = "        // TODO: Code logic here";
+  const fromIndex = codeString.indexOf(from);
+  const codeToChange = codeString.slice(fromIndex);
+
+  const newCodeString = codeToChange.replaceAll(oldNameInCode, newNameInCode);
+  const transaction = editor.state.update({
+    changes: [
+      {
+        from: fromIndex,
+        to: editor.state.doc.length,
+        insert: newCodeString,
+      },
+    ],
+  });
+  editor.dispatch(transaction);
 };
