@@ -46,7 +46,7 @@ function App() {
 
       appState.addConnection(filter.id, {
         pipeId: pipe.id,
-        pipeType: pipe.textContent.replace(/\s+/g, "").split(`"`)[0],
+        pipeType: pipe.textContent.replace(/\s+/g, "").slice(0, 5),
       });
 
       return true;
