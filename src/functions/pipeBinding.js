@@ -94,8 +94,8 @@ export const handlePipeBinding = (pipeMapping, editor) => {
   const outgoingPipes = pipeMapping.filter(
     (pipe) => pipe.pipeDirection === "out"
   );
-  let lineNumberIn = 16;
-  let lineNumberOut = 18 + incomingPipes.length * 4;
+  let lineNumberIn = 17;
+  let lineNumberOut = 19 + incomingPipes.length * 4;
 
   fillEditorwithCode(editor, incomingPipes, lineNumberIn);
   fillEditorwithCode(editor, outgoingPipes, lineNumberOut);
