@@ -13,20 +13,18 @@ export const namePipe = (instance) => {
   );
 
   while (true) {
-    newPipeName = prompt("Bitte geben Sie einen Pipe Namen ein:");
+    newPipeName = prompt("Please enter a pipe name:");
 
     let nameExists = Array.from(appState.getState().pipes.values()).includes(
       newPipeName
     );
 
     if (nameExists) {
-      alert(
-        "Dieser Name ist bereits vergeben. Bitte geben Sie einen anderen Namen ein."
-      );
+      alert("This name is already taken. Please enter another name.");
     } else if (pipeHasConnection && pipeWasNamedBefore && newPipeName) {
       if (
         confirm(
-          "Durch ändern des Pipe Namens wird dein Code im Filter angepasst! Alle alten Pipe Namen werden durch den Neuen ersetzt."
+          "Changing the pipe name will adjust your code in the filter! All old pipe names will be replaced by the new one."
         )
       ) {
         const oldPipeName = appState.getPipe(selectedPipe);
@@ -79,16 +77,14 @@ export const nameFilter = (instance) => {
   let newFilterName;
 
   while (true) {
-    newFilterName = prompt("Bitte geben Sie einen Filter Namen ein:");
+    newFilterName = prompt("Please enter a filter name:");
     const allFilterNames = document.querySelectorAll("#Diagram #FilterName");
     let nodeArray = Array.from(allFilterNames);
     let innerHTMLArray = nodeArray.map((node) => node.innerHTML);
     const nameExists = innerHTMLArray.includes(newFilterName);
 
     if (nameExists) {
-      alert(
-        "Dieser Name ist bereits vergeben. Bitte geben Sie einen anderen Namen ein."
-      );
+      alert("This name is already taken. Please enter another name.");
     } else {
       break;
     }
