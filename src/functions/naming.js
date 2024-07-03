@@ -1,6 +1,6 @@
 import { showCheck } from "./visualValidation";
 import { appState } from "./state";
-import { renamePipeNamesInCode } from "./pipeBinding";
+import { renamePipeNamesInCode } from "./codeEditorHandler";
 
 export const namePipe = (instance) => {
   let newPipeName;

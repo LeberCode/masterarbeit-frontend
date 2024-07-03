@@ -3,7 +3,11 @@ import { EditorState } from "@codemirror/state";
 import { javascript } from "@codemirror/lang-javascript";
 import { createCustomCode } from "./api";
 import { showCheck } from "./visualValidation";
-import { handlePipeBinding, getPipesForFilter } from "./pipeBinding";
+import {
+  handlePipeBinding,
+  getPipesForFilter,
+  deleteWrittenCode,
+} from "./codeEditorHandler";
 
 let editorValues = {
   doc: "// Please don't remove comments!\nconst amqp = require('amqplib/callback_api');\n\nconst rabbitmqUrl = 'amqp://mquser:mqpass@rabbit:5672';\n\namqp.connect(rabbitmqUrl, (error0, connection) => {\n    if (error0) {\n        throw error0;\n    }\n    connection.createChannel((error1, channel) => {\n        if (error1) {\n            throw error1;\n        }\n\n        // START PIPE-BINDING\n        // INCOMING PIPES\n        // OUTGOING PIPES\n        // END PIPE-BINDING\n\n        // TODO: Code logic here\n\n\n\t});\n});\n",
@@ -140,7 +144,12 @@ export const codeEditorElement = (instance) => {
 };
 
 const handleCancel = (node) => {
-  node.style.visibility = "hidden";
+  if (confirm("No changes will be saved!")) {
+    node.style.visibility = "hidden";
+    deleteWrittenCode(node.editor);
+  } else {
+    return;
+  }
 };
 const handleSubmit = (node, code) => {
   const requestBody = {

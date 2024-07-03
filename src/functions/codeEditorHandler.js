@@ -235,3 +235,19 @@ export const renamePipeNamesInCode = (editor, oldName, newName) => {
   });
   editor.dispatch(transaction);
 };
+
+export const deleteWrittenCode = (editor) => {
+  const codeString = editor.state.doc.toString();
+  const from = "        // TODO: Code logic here";
+  const fromIndex = codeString.indexOf(from);
+  const transaction = editor.state.update({
+    changes: [
+      {
+        from: fromIndex + from.length,
+        to: editor.state.doc.length,
+        insert: "\n\n\n\t});\n});\n",
+      },
+    ],
+  });
+  editor.dispatch(transaction);
+};
