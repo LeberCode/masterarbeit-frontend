@@ -144,7 +144,7 @@ export const codeEditorElement = (instance) => {
 };
 
 const handleCancel = (node) => {
-  if (confirm("No changes will be saved!")) {
+  if (confirm("No changes will be saved! Need to submit!")) {
     node.style.visibility = "hidden";
     deleteWrittenCode(node.editor);
   } else {
