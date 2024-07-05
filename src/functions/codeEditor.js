@@ -125,14 +125,16 @@ export const codeEditorElement = (instance) => {
 
     const submitButton = document.createElement("button");
     submitButton.appendChild(document.createTextNode("SUBMIT"));
-    submitButton.classList.add("submitButton");
+    submitButton.classList.add("customButton");
+    submitButton.id = "submitButton";
     submitButton.addEventListener("click", () =>
       handleSubmit(editorContainer, editor.state.doc.toString())
     );
 
     const cancelButton = document.createElement("button");
     cancelButton.appendChild(document.createTextNode("CANCEL"));
-    cancelButton.classList.add("cancelButton");
+    cancelButton.classList.add("customButton");
+    cancelButton.id = "cancelButton";
     cancelButton.addEventListener("click", () => handleCancel(editorContainer));
 
     buttonContainer.appendChild(cancelButton);

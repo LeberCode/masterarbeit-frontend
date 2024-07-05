@@ -17,12 +17,17 @@
   </head>
   <body>
     <div class="App">
-      <div>
-        <h1>Prototype for my masters degree</h1>
-      </div>
       <div class="Body">
         <div id="Toolbox">
-          <h4>TOOLBOX</h4>
+          <div id="logoContainer">
+            <img
+              src="../assets/CC-Logo.png"
+              alt="Logo der Website"
+              id="logo"
+              width="156px"
+            />
+          </div>
+          <hr />
           <div>
             <h5>PIPES</h5>
             <div class="Pipe" data-type="Distributor" data-pipetype="Queue">
@@ -121,10 +126,12 @@
           <div id="Loader"></div>
           <i id="Success" class="far fa-check-circle"></i>
           <i id="Error" class="far fa-times-circle"></i>
-          <button id="ClearModel">Clear Model</button>
-          <button id="KillDeployment" disabled="true">Kill Deployment</button>
-          <button id="Deploy">Deploy</button>
-          <button id="Pause">Pause</button>
+          <button class="customButton" id="ClearModel">Clear Model</button>
+          <button class="customButton" id="KillDeployment" disabled="true">
+            Kill Deployment
+          </button>
+          <button class="customButton" id="Deploy">Deploy</button>
+          <button class="customButton" id="Pause">Pause</button>
         </div>
       </div>
       <div class="iconsLegend">

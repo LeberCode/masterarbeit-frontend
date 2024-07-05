@@ -1,27 +1,31 @@
 const endpointLeft = {
-  endpoint: ["Dot", { radius: 5 }],
+  endpoint: ["Dot", { radius: 4 }],
   anchor: ["LeftMiddle"],
   isTarget: true,
   connectionType: "flow",
+  paintStyle: { fill: "black" },
 };
 const endpointRight = {
-  endpoint: ["Dot", { radius: 5 }],
+  endpoint: ["Dot", { radius: 4 }],
   anchor: ["RightMiddle"],
   isSource: true,
   connectionType: "flow",
+  paintStyle: { fill: "black" },
 };
 const severalEndpointsLeft = {
-  endpoint: ["Dot", { radius: 5 }],
+  endpoint: ["Dot", { radius: 4 }],
   anchor: ["LeftMiddle"],
   isTarget: true,
   connectionType: "flow",
+  paintStyle: { fill: "black" },
   maxConnections: 5,
 };
 const severalEndpointsRight = {
-  endpoint: ["Dot", { radius: 5 }],
+  endpoint: ["Dot", { radius: 4 }],
   anchor: ["RightMiddle"],
   isSource: true,
   connectionType: "flow",
+  paintStyle: { fill: "black" },
   maxConnections: 5,
 };
 

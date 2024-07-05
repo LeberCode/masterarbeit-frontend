@@ -23,9 +23,8 @@ function App() {
   instance.ready(() => {
     instance.registerConnectionTypes({
       flow: {
-        paintStyle: { stroke: "blue", strokeWidth: 2 },
-        hoverPaintStyle: { stroke: "blue", strokeWidth: 3 },
-        connector: ["Flowchart", { cornerRadius: 25 }],
+        paintStyle: { stroke: "black", strokeWidth: 2 },
+        connector: ["Flowchart", { cornerRadius: 6 }],
       },
     });
 

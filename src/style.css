@@ -1,44 +1,49 @@
+body {
+  background-color: rgb(249, 249, 249);
+}
+
 .App {
   text-align: center;
 }
 
 .Body {
   display: flex;
+  font-family: "Times New Roman", Times, serif;
 }
 
 #Diagram {
-  width: 80%;
-  height: 85vh;
+  width: 100%;
+  height: 95vh;
   margin: 6px;
   border: 1px solid black;
   position: relative;
 }
 
 #Toolbox {
-  width: 20%;
-  height: 85vh;
+  width: fit-content;
+  height: 95vh;
   margin: 6px;
+  padding: 0 24px;
   border: 1px solid black;
 }
 .Filter {
   text-align: center;
   align-content: center;
   position: absolute;
-  border: 2px solid black;
+  border: 1px solid black;
   border-radius: 4px;
   min-width: 84px;
   width: fit-content;
   height: 66px;
-  padding: 6px;
-  padding-bottom: 3px;
-  padding-top: 3px;
+  padding: 3px 6px;
   cursor: grab;
-  background-color: ghostwhite;
+  background-color: white;
+  box-shadow: gray 0px 6px 6px -6px;
 }
 
 #Toolbox .Filter {
   position: relative;
-  margin: 12px;
+  margin: 12px auto;
 }
 
 .Filter:active {
@@ -49,15 +54,14 @@
   text-align: center;
   align-content: center;
   position: absolute;
-  padding: 12px;
-  padding-top: 3px;
-  padding-bottom: 3px;
+  padding: 3px 12px;
   width: fit-content;
   height: fit-content;
-  border: 2px solid black;
-  border-radius: 24px;
+  border: 1px solid black;
+  border-radius: 18px;
   cursor: grab;
-  background-color: ghostwhite;
+  background-color: white;
+  box-shadow: gray 0px 6px 6px -4px;
 }
 
 .Pipe:active {
@@ -66,7 +70,7 @@
 
 #Toolbox .Pipe {
   position: relative;
-  margin: 12px;
+  margin: 12px auto;
 }
 
 .custom-menu {
@@ -97,13 +101,8 @@
 
 .editorContainer {
   position: absolute;
-  /* top: 120px;
-  left: 0px;
-  right: 0px;
-  margin: auto; */
   text-align: left;
   width: 80%;
-  /* height: 50vh; */
   border-radius: 12px;
   padding: 12px;
   box-shadow: 0px 0px 12px darkgray;
@@ -116,25 +115,13 @@
   cursor: grabbing;
 }
 
-.submitButton {
+#submitButton {
   background-color: #04aa6d;
-  border: 1px black solid;
-  border-radius: 4px;
-  padding: 12px;
-  padding-top: 6px;
-  padding-bottom: 6px;
   margin: 6px;
-  cursor: pointer;
 }
 
-.cancelButton {
-  border: 1px darkgray solid;
-  border-radius: 4px;
-  padding: 12px;
-  padding-top: 6px;
-  padding-bottom: 6px;
+#cancelButton {
   margin: 6px;
-  cursor: pointer;
 }
 
 .codeEditorButtons {
@@ -153,68 +140,47 @@
   font-weight: bold;
 }
 
+.customButton {
+  border: 0px black solid;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  width: 120px;
+  box-shadow: gray 0px 6px 6px -6px;
+}
+
 #Deploy {
   position: absolute;
-  right: 90px;
+  right: 144px;
   top: 24px;
-  width: 72px;
   background-color: #04aa6d;
-  border: 1px black solid;
-  border-radius: 4px;
-  padding: 12px;
-  padding-top: 6px;
-  padding-bottom: 6px;
-  cursor: pointer;
 }
 
 #Pause {
   position: absolute;
   right: 12px;
   top: 24px;
-  width: 72px;
-  background-color: red;
-  border: 1px black solid;
-  border-radius: 4px;
-  padding: 12px;
-  padding-top: 6px;
-  padding-bottom: 6px;
-  cursor: pointer;
+  background-color: orange;
 }
 
 #ClearModel {
   position: absolute;
   left: 12px;
   top: 24px;
-  width: 120px;
   background-color: lightblue;
-  border: 1px black solid;
-  border-radius: 4px;
-  padding: 12px;
-  padding-top: 6px;
-  padding-bottom: 6px;
-  cursor: pointer;
 }
 
 #KillDeployment {
   position: absolute;
   left: 144px;
   top: 24px;
-  width: 120px;
-  background-color: lightblue;
-  border: 1px black solid;
-  border-radius: 4px;
-  padding: 12px;
-  padding-top: 6px;
-  padding-bottom: 6px;
-  cursor: pointer;
+  background-color: red;
 }
 
-#Pause:disabled {
-  cursor: not-allowed;
-  background-color: lightgray;
-  color: rgba(0, 0, 0, 0.5);
-}
-#Deploy:disabled {
+#Deploy:disabled,
+#Pause:disabled,
+#ClearModel:disabled,
+#KillDeployment:disabled {
   cursor: not-allowed;
   background-color: lightgray;
   color: rgba(0, 0, 0, 0.5);
@@ -262,7 +228,7 @@
   top: -24px;
   border: 2px black solid;
   border-radius: 24px;
-  background-color: ghostwhite;
+  background-color: white;
   padding: 3px;
 }
 
@@ -341,4 +307,8 @@
 .iconsLegend {
   display: flex;
   justify-content: space-around;
+}
+
+#logoContainer {
+  padding-top: 24px;
 }
