@@ -66,15 +66,12 @@ export const showDeployIcon = (id) => {
 // };
 
 export const showPause = () => {
-  console.log("HI");
   let elementsToHide = document.querySelectorAll("#Diagram .Filter");
   elementsToHide.forEach((el) => {
-    console.log(el);
-    const isVisible = el.childNodes[7].style.visibility === "visible";
+    const isVisible = el.childNodes[11].style.visibility === "visible";
     if (isVisible) {
-      console.log("Wäre cool");
-      el.childNodes[7].style.visibility = "hidden";
-      el.childNodes[9].style.visibility = "visible";
+      el.childNodes[11].style.visibility = "hidden";
+      el.childNodes[13].style.visibility = "visible";
       el.style.borderColor = "orange";
     }
   });
