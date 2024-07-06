@@ -82,30 +82,31 @@ function App() {
   });
 
   const deployElement = document.getElementById("Deploy");
+  const deployTextElement = document.getElementById("DeployText");
   const pauseElement = document.getElementById("Pause");
   const clearModelElement = document.getElementById("ClearModel");
   const killDeploymentElement = document.getElementById("KillDeployment");
 
-  deployElement.addEventListener("click", () => {
+  deployElement.addEventListener("click", async () => {
     if (!appState.getState().beenPaused) {
-      runCustomCode();
+      await runCustomCode();
       deployElement.removeAttribute("disabled");
       appState.setBeenPaused(true);
     } else {
-      restartCustomCode();
+      await restartCustomCode();
     }
-    getScaleValues();
+    await getScaleValues();
     deployElement.setAttribute("disabled", "disabled");
     pauseElement.removeAttribute("disabled");
     killDeploymentElement.disabled = false;
     clearModelElement.disabled = true;
   });
 
-  pauseElement.addEventListener("click", () => {
-    stopCustomCode();
+  pauseElement.addEventListener("click", async () => {
+    await stopCustomCode();
     showPause();
     pauseElement.setAttribute("disabled", "disabled");
-    deployElement.innerHTML = "Restart";
+    deployTextElement.innerHTML = "Restart";
     deployElement.removeAttribute("disabled");
   });
   pauseElement.setAttribute("disabled", "disabled");
@@ -127,7 +128,7 @@ function App() {
     killDeploymentElement.disabled = true;
     await getScaleValues();
     showAllWarning();
-    deployElement.innerHTML = "Deploy";
+    deployTextElement.innerHTML = "Deploy";
   });
 }
 

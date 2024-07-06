@@ -16,6 +16,7 @@ body {
   height: 95vh;
   margin: 6px;
   border: 1px solid black;
+  border-radius: 4px;
   position: relative;
 }
 
@@ -25,6 +26,7 @@ body {
   margin: 6px;
   padding: 0 24px;
   border: 1px solid black;
+  border-radius: 4px;
 }
 .Filter {
   text-align: center;
