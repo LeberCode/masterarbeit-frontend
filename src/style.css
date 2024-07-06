@@ -78,9 +78,36 @@ body {
 .custom-menu {
   z-index: 1000;
   position: absolute;
-  background-color: #c0c0c0;
-  border: 1px solid black;
-  padding: 2px;
+  background-color: lightgray;
+  border-radius: 6px;
+  padding: 6px;
+}
+
+.custom-menu-button {
+  background-color: inherit;
+  text-align: left;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.custom-menu-button:hover {
+  background-color: lightblue;
+}
+
+#delete-pipe:hover {
+  background-color: red;
+}
+
+#delete-filter:hover {
+  background-color: red;
+  color: white;
+}
+
+#scale-out:hover {
+  background-color: blue;
+  color: white;
 }
 
 .window {

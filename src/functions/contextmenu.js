@@ -34,20 +34,21 @@ export const initContextmenu = (instance) => {
     event.preventDefault();
     window.selectedFilter = $(event.currentTarget).attr("id");
     $(
-      `<div style='display: flex; flex-direction: column;' class='custom-menu'>
-        <button style='border: none; padding: 6px 12px; cursor: pointer;' class='code-filter'>
-        Add Implementation
+      `<div style='display: flex; flex-direction: column; text-align: left;' class='custom-menu'>
+        <button class='custom-menu-button' id='code-filter'>
+          <span style='margin-right: 6px;'> Add Implementation </span>
+          <i style='color: red;' class="fa-sharp fa-solid fa-l fa-exclamation"></i>
         </button>
-        <button style='border: none; padding: 6px 12px; cursor: pointer;' class='name-filter'>
+        <button class='custom-menu-button' id='name-filter'>
           Name Filter
         </button>
-        <button style='border: none; padding: 6px 12px; cursor: pointer;' class='duplicate-filter'>
+        <button class='custom-menu-button' id='duplicate-filter'>
           Duplicate Filter
         </button>
-        <button style='background-color: blue; color: white; border: none; padding: 6px 12px; cursor: pointer;' class='scale-out'>
+        <button class='custom-menu-button' id='scale-out'>
           Scale Out
         </button>
-        <button style='background-color: red; color: white; border: none; padding: 6px 12px; cursor: pointer;' class='delete-filter'>
+        <button class='custom-menu-button' id='delete-filter'>
           Delete Filter
         </button>
       </div>"`
@@ -56,21 +57,21 @@ export const initContextmenu = (instance) => {
       .css({ top: event.pageY + "px", left: event.pageX + "px" });
   });
 
-  $("body").on("click", ".code-filter", (event) => {
+  $("body").on("click", "#code-filter", (event) => {
     codeEditorElement(instance);
   });
-  $("body").on("click", ".name-filter", (event) => {
+  $("body").on("click", "#name-filter", (event) => {
     nameFilter(instance);
   });
-  $("body").on("click", ".duplicate-filter", (event) => {
+  $("body").on("click", "#duplicate-filter", (event) => {
     duplicateFilter(instance);
   });
-  $("body").on("click", ".scale-out", (event) => {
+  $("body").on("click", "#scale-out", (event) => {
     scaleOut(window.selectedFilter);
     document.getElementById("Pause").removeAttribute("disabled");
     document.getElementById("Deploy").setAttribute("disabled", "disabled");
   });
-  $("body").on("click", ".delete-filter", (event) => {
+  $("body").on("click", "#delete-filter", (event) => {
     instance.remove(window.selectedFilter);
     appState.removeConnection(window.selectedFilter);
   });
@@ -81,13 +82,14 @@ export const initContextmenu = (instance) => {
     window.selectedPipe = $(event.currentTarget).attr("id");
     $(
       `<div style='display: flex; flex-direction: column;' class='custom-menu'>
-        <button style='border: none; padding: 6px 12px; cursor: pointer;' class='name-pipe'>
-          Name Pipe
+        <button class='custom-menu-button' id='name-pipe'>
+          <span style='margin-right: 6px;'> Name Pipe </span>
+          <i style='color: red;' class="fa-sharp fa-solid fa-l fa-exclamation"></i>
         </button>
-        <button style='border: none; padding: 6px 12px; cursor: pointer;' class='duplicate-pipe'>
+        <button class='custom-menu-button' id='duplicate-pipe'>
           Duplicate Pipe
         </button>
-        <button style='background-color: red; color: white; border: none; padding: 6px 12px; cursor: pointer;' class='delete-pipe'>
+        <button class='custom-menu-button' id='delete-pipe'>
           Delete Pipe
         </button>
       </div>`
@@ -96,15 +98,15 @@ export const initContextmenu = (instance) => {
       .css({ top: event.pageY + "px", left: event.pageX + "px" });
   });
 
-  $("body").on("click", ".delete-pipe", (event) => {
+  $("body").on("click", "#delete-pipe", (event) => {
     instance.remove(window.selectedPipe);
     appState.removePipe(window.selectedPipe);
     appState.removeConnectionValue(window.selectedPipe);
   });
-  $("body").on("click", ".duplicate-pipe", (event) => {
+  $("body").on("click", "#duplicate-pipe", (event) => {
     duplicatePipe(instance);
   });
-  $("body").on("click", ".name-pipe", (event) => {
+  $("body").on("click", "#name-pipe", (event) => {
     namePipe(instance);
   });
 };
