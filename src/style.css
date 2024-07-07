@@ -1,5 +1,6 @@
 body {
   background-color: rgb(249, 249, 249);
+  font-family: "Times New Roman", Times, serif;
 }
 
 .App {
@@ -182,6 +183,7 @@ body {
   cursor: pointer;
   width: 120px;
   box-shadow: gray 0px 6px 6px -6px;
+  font-family: "Times New Roman", Times, serif;
 }
 
 #Deploy {
