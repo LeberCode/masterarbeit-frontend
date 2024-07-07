@@ -12,7 +12,7 @@ export const initContextmenu = (instance) => {
       window.selectedConnection = component;
       $(
         `<div class='custom-menu'>
-          <button style='background-color: red; color: white; border: none; padding: 6px 12px;' class='delete-connection'>
+          <button class='custom-menu-button' id='delete-connection'>
             Delete connection
           </button>
         </div>`
@@ -22,7 +22,7 @@ export const initContextmenu = (instance) => {
     }
   });
 
-  $("body").on("click", ".delete-connection", (event) => {
+  $("body").on("click", "#delete-connection", (event) => {
     instance.deleteConnection(window.selectedConnection);
   });
   $(document).bind("click", (event) => {

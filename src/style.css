@@ -98,9 +98,15 @@ body {
 
 #delete-pipe:hover {
   background-color: red;
+  color: white;
 }
 
 #delete-filter:hover {
+  background-color: red;
+  color: white;
+}
+
+#delete-connection:hover {
   background-color: red;
   color: white;
 }
