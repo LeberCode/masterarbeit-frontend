@@ -78,7 +78,9 @@ export const codeEditorElement = (instance) => {
       document.createTextNode("Incoming Pipes")
     );
     incomingContainer.appendChild(incomingHeadingElement);
-    incomingContainer.appendChild(document.createElement("hr"));
+    incomingContainer.appendChild(
+      document.createElement("hr")
+    ).style.margin = 0;
 
     const incomingPipes = document.createElement("div");
     incomingPipes.id = "incomingPipes";
@@ -94,7 +96,9 @@ export const codeEditorElement = (instance) => {
       document.createTextNode("Outgoing Pipes")
     );
     outgoingContainer.appendChild(outgoingHeadingElement);
-    outgoingContainer.appendChild(document.createElement("hr"));
+    outgoingContainer.appendChild(
+      document.createElement("hr")
+    ).style.margin = 0;
     const outgoingPipes = document.createElement("div");
     outgoingPipes.id = "outgoingPipes";
     outgoingContainer.appendChild(outgoingPipes);
