@@ -51,6 +51,7 @@ export const codeEditorElement = (instance) => {
     containerHeading.appendChild(document.createTextNode("CODE EDITOR"));
     containerHeading.style.marginTop = "6px";
     containerHeading.style.marginBottom = "0px";
+    containerHeading.style.textAlign = "center";
     editorContainer.appendChild(containerHeading);
 
     const editorNameElement = document.createElement("h4");
