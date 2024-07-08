@@ -14,7 +14,7 @@ body {
 
 #Diagram {
   width: 100%;
-  height: 95vh;
+  height: 98vh;
   margin: 6px;
   border: 1px solid black;
   border-radius: 4px;
@@ -23,11 +23,13 @@ body {
 
 #Toolbox {
   width: fit-content;
-  height: 95vh;
+  height: 98vh;
   margin: 6px;
   padding: 0 24px;
   border: 1px solid black;
   border-radius: 4px;
+  overflow-y: auto;
+  overflow-x: auto;
 }
 .Filter {
   text-align: center;
@@ -341,9 +343,9 @@ body {
   justify-content: space-between;
 }
 
-.iconsLegend {
-  display: flex;
-  justify-content: space-around;
+.elementsInLegend {
+  text-align: left;
+  margin: 12px 0;
 }
 
 #logoContainer {
