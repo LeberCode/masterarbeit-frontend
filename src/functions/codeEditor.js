@@ -52,11 +52,13 @@ export const codeEditorElement = (instance) => {
     containerHeading.style.marginTop = "6px";
     containerHeading.style.marginBottom = "0px";
     containerHeading.style.textAlign = "center";
+    containerHeading.style.fontWeight = "600";
     editorContainer.appendChild(containerHeading);
 
     const editorNameElement = document.createElement("h4");
     editorNameElement.style.marginTop = "6px";
     editorNameElement.style.marginBottom = "6px";
+    editorNameElement.style.fontWeight = "600";
     editorNameElement.appendChild(
       document.createTextNode(
         `${filterToCode.type}: ${
@@ -74,6 +76,7 @@ export const codeEditorElement = (instance) => {
     const incomingHeadingElement = document.createElement("h5");
     incomingHeadingElement.style.margin = "0px";
     incomingHeadingElement.style.marginBottom = "6px";
+    incomingHeadingElement.style.fontWeight = "600";
 
     incomingHeadingElement.appendChild(
       document.createTextNode("Incoming Pipes")
@@ -93,6 +96,8 @@ export const codeEditorElement = (instance) => {
     const outgoingHeadingElement = document.createElement("h5");
     outgoingHeadingElement.style.margin = "0px";
     outgoingHeadingElement.style.marginBottom = "6px";
+    outgoingHeadingElement.style.fontWeight = "600";
+
     outgoingHeadingElement.appendChild(
       document.createTextNode("Outgoing Pipes")
     );
@@ -151,7 +156,7 @@ export const codeEditorElement = (instance) => {
 };
 
 const handleCancel = (node) => {
-  if (confirm("No changes will be saved! Need to submit!")) {
+  if (confirm("You are about to leave with no changes submitted!")) {
     node.style.visibility = "hidden";
     deleteWrittenCode(node.editor);
   } else {

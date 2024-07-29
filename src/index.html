@@ -21,15 +21,15 @@
         <div id="Toolbox">
           <div id="logoContainer">
             <img
-              src="../assets/CC-Logo.png"
+              src="../assets/Logo.png"
               alt="Logo der Website"
               id="logo"
-              width="144px"
+              width="60px"
             />
           </div>
           <hr />
           <div>
-            <h5>PIPES</h5>
+            <h5 style="font-weight: normal">PIPES</h5>
             <div class="Pipe" data-type="Distributor" data-pipetype="Queue">
               Queue
               <br />
@@ -53,7 +53,7 @@
           </div>
           <hr />
           <div>
-            <h5>FILTERS</h5>
+            <h5 style="font-weight: normal">FILTERS</h5>
             <div class="Filter" data-type="Start">
               Sender
               <br />
@@ -120,9 +120,9 @@
               <i id="PauseIcon" class="fa-solid fa-xl fa-pause"></i>
             </div>
           </div>
-          <hr />
-          <div style="white-space: nowrap">
-            <h5>Legend</h5>
+          <!-- <hr /> -->
+          <div class="legendContainer" style="white-space: nowrap">
+            <h5 style="font-size: 14px; font-weight: normal">Legend</h5>
             <div class="elementsInLegend">
               <i
                 style="color: red; margin-right: 6px"
@@ -154,7 +154,9 @@
           </div>
         </div>
         <div id="Diagram">
-          <h4>ARCHITECTURE</h4>
+          <h4 style="font-weight: normal; margin-top: 24px">
+            MESSAGING-BASED &nbsp;SOFTWARE &nbsp;ARCHITECTURE
+          </h4>
           <div id="Loader"></div>
           <i id="Success" class="far fa-check-circle"></i>
           <i id="Error" class="far fa-times-circle"></i>
