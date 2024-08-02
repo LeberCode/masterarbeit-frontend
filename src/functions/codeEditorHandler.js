@@ -51,9 +51,9 @@ export const getPipesForFilter = (instance) => {
 export const handlePipeBinding = (pipeMapping, editor) => {
   // clear pipe-binindg code
   let codeArray = editor.state.doc.toString();
-  const start = "        // INCOMING PIPES";
-  const middle = "        // OUTGOING PIPES";
-  const end = "        // END PIPE-BINDING";
+  const start = "    // INCOMING PIPES";
+  const middle = "    // OUTGOING PIPES";
+  const end = "    // END PIPE-BINDING";
 
   const startIndex = codeArray.indexOf(start);
   const midIndexIn = codeArray.indexOf(middle);
@@ -199,11 +199,11 @@ const fillEditorwithCode = (editor, pipeMapping, lineNumber) => {
     let position = line.from;
     let pipeNameUserGiven = pipe.pipeName;
     let pipeNameDeklaration = makeValidConstName(pipeNameUserGiven);
-    let insertCode = `\t\tconst ${pipeNameDeklaration} = "${pipeNameUserGiven}";\n\t\tchannel.assert${
+    let insertCode = `    const ${pipeNameDeklaration} = "${pipeNameUserGiven}";\n    channel.assert${
       pipe.pipeType === "Queue" ? "Queue" : "Exchange"
     }(${pipeNameDeklaration}, ${
       pipe.pipeType === "Topic" ? `"topic", ` : ""
-    }{\n\t\t\tdurable: false\n\t\t});\n`;
+    }{\n      durable: false\n    });\n`;
     let transaction = editor.state.update({
       changes: {
         from: position,
@@ -219,7 +219,7 @@ export const renamePipeNamesInCode = (editor, oldName, newName) => {
   const oldNameInCode = makeValidConstName(oldName);
   const newNameInCode = makeValidConstName(newName);
   const codeString = editor.state.doc.toString();
-  const from = "        // TODO: Code logic here";
+  const from = "    // TODO: Code logic here";
   const fromIndex = codeString.indexOf(from);
   const codeToChange = codeString.slice(fromIndex);
 
@@ -238,14 +238,14 @@ export const renamePipeNamesInCode = (editor, oldName, newName) => {
 
 export const deleteWrittenCode = (editor) => {
   const codeString = editor.state.doc.toString();
-  const from = "        // TODO: Code logic here";
+  const from = "    // TODO: Code logic here";
   const fromIndex = codeString.indexOf(from);
   const transaction = editor.state.update({
     changes: [
       {
         from: fromIndex + from.length,
         to: editor.state.doc.length,
-        insert: "\n\n\n\t});\n});\n",
+        insert: "\n\n\n  });\n});\n",
       },
     ],
   });

@@ -10,7 +10,7 @@ import {
 } from "./codeEditorHandler";
 
 let editorValues = {
-  doc: "// Please don't remove comments!\nconst amqp = require('amqplib/callback_api');\n\nconst rabbitmqUrl = 'amqp://mquser:mqpass@rabbit:5672';\n\namqp.connect(rabbitmqUrl, (error0, connection) => {\n    if (error0) {\n        throw error0;\n    }\n    connection.createChannel((error1, channel) => {\n        if (error1) {\n            throw error1;\n        }\n\n        // START PIPE-BINDING\n        // INCOMING PIPES\n        // OUTGOING PIPES\n        // END PIPE-BINDING\n\n        // TODO: Code logic here\n\n\n\t});\n});\n",
+  doc: "// Please don't remove comments!\nconst amqp = require('amqplib/callback_api');\n\nconst rabbitmqUrl = 'amqp://mquser:mqpass@rabbit:5672';\n\namqp.connect(rabbitmqUrl, (error0, connection) => {\n  if (error0) {\n    throw error0;\n  }\n  connection.createChannel((error1, channel) => {\n    if (error1) {\n      throw error1;\n    }\n\n    // START PIPE-BINDING\n    // INCOMING PIPES\n    // OUTGOING PIPES\n    // END PIPE-BINDING\n\n    // TODO: Code logic here\n\n\n  });\n});\n",
   extensions: [basicSetup, javascript()],
 };
 
